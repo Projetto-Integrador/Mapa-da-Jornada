@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <p>Nome: {{ nome }}</p>
-    <p>Idade: {{ idade }}</p>
-    <p>Idade: {{ idade }}</p>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+    <main>
+        <button class="bg-green-300 rounded-full text-black font-medium px-12 py-2 border-0 text-base items-center flex justify-center">
+            <a href="https://amor.com"> 💚 PANORAMA GERAL </a>
+        </button>
+        <h1 class="text-center text-6xl p-48 flex items-center justify-center font-sora font-bold"> Descubra o que é possível com <br/> o extenso mundo da <br/> criação. </h1>
+    </main>
+{% endblock content %}
