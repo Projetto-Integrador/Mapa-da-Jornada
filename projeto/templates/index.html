@@ -3,7 +3,7 @@
 {% block content %}
 
 
-<main class="w-auto h-[700px] flex flex-col items-center justify-center bg-white rounded shadow p-6">
+<main class="w-auto h-[600px] flex flex-col items-center justify-center bg-white rounded shadow p-6">
     <div class="text-center">
         <button class="max-w-[800px] mx-auto bg-green-300 rounded-full text-black font-medium px-12 py-2 border-0 text-lg mb-10 items-center">
             <a href="https://amor.com"> 💚 APROVEITE A JORNADA  </a>
@@ -12,8 +12,7 @@
         <p class="text-gray-600 text-lg max-w-[800px] mx-auto p-4">Nós criamos o Mapa da Jornada para ajudar na sua jornada de aprendizado. Um mapeamento das principais demandas exigidas pelo mercado, com sugestões, evidências e opiniões.</p>
     </div>
 </main>
-
-<div class="w-auto h-[800px] bg-black/10 rounded shadow px-64 py-16 flex flex-col">
+<div class="w-auto h-[1200px] bg-black/10 rounded shadow px-64 py-16 flex flex-col">
 
     <button class="max-w-[800px] mx-auto bg-green-300 rounded-full text-black font-medium px-12 py-2 border-0 text-lg mb-10 items-center">
         <a href="https://amor.com"> 💚 PANORAMA GERAL </a>
@@ -21,16 +20,36 @@
     
     <h1 class="text-6xl font-bold"> Informática para Internet </h1>
     <h2 class="text-4xl mt-2 mb-4 font-medium"> Curso: Técnico Integrado </h2> 
-    
-    <div class="desc flex my-4 w-full 4xl">
-        <h3 class="4xl mr-4"><strong> Carga horária: </strong> <br /> 3995h </h3>
-        <h3 class="4xl mr-4"><strong> Duração: </strong> <br /> Quatro anos </h3>
-        <h3 class="4xl mr-4"><strong> Tipo de ensino: </strong> <br /> Presencial </h3>
-        <h3 class="4xl mr-4"><strong> Oferta em: </strong> <br /> <a href="https://site.com"> Natal-Central </a> | <a href="https://site.com">Natal-Zona Norte</a> | <a href="https://natal.com">São Paulo do Potengi</a></h3>
+    <div class="desc flex my-4 w-full">
+        <h3 class="mr-4"><strong> Carga horária: </strong> <br /> 3995h </h3>
+        <h3 class="mr-4"><strong> Duração: </strong> <br /> Quatro anos </h3>
+        <h3 class="mr-4"><strong> Tipo de ensino: </strong> <br /> Presencial </h3>
+        <h3 class="mr-4"><strong> Oferta em: </strong> <br /> <a href="https://site.com"> Natal-Central </a> | <a href="https://site.com">Natal-Zona Norte</a> | <a href="https://natal.com">São Paulo do Potengi</a></h3>
     </div> <!-- descrição do curso de info -->
+    <div class="border-t-2 border-black my-2"></div>
 
-    <div class="border-t-2 border-black my-4"></div>
-
+    <div class="grid grid-cols-[300px_1fr] gap-4 h-full">
+        <aside class="h-full bg-lime-950 rounded-2xl mt-2 text-white">
+            <div class="m-4">
+                <h2 class="text-3xl font-bold">Período letivo</h2>
+                <p class="mt-2">Em qual ano letivo você se encontra?</p>
+                <ul class="mt-4">
+                    <li><a href="#" class="text-lime-500 text-xl">Primeiro ano</a></li>
+                    <li><a href="#" class="text-lime-500 text-xl">Segundo ano</a></li>
+                    <li><a href="#" class="text-lime-500 text-xl">Terceiro ano</a></li>
+                    <li><a href="#" class="text-lime-500 text-xl">Quarto ano</a></li>
+                </ul>
+                <img src="imagem.jpg" alt="Descrição da imagem" class="mt-4">
+            </div>
+        </aside>
+    
+        <div class="grid content-start gap-4 mt-2 rounded-2xl">
+            <div class="bg-green-300 h-32 rounded-2xl p-4"> Engenharia de Dados </div>
+            <div class="bg-green-300 h-32 rounded-2xl p-4"> Introdução à Lógica e Algoritmos </div>
+            <div class="bg-green-300 h-32 rounded-2xl p-4"> Informática </div>
+        </div>
+    </div>
     
 </div> 
+
 {% endblock content %}
