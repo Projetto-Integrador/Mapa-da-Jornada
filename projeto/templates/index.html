@@ -1,10 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <main>
-        <button class="bg-green-300 rounded-full text-black font-medium px-12 py-2 border-0 text-base items-center flex justify-center">
-            <a href="https://amor.com"> 💚 PANORAMA GERAL </a>
+
+
+<main class="w-auto h-[700px] flex flex-col items-center justify-center bg-white rounded shadow p-6">
+    <div class="text-center">
+        <button class="max-w-[800px] mx-auto bg-green-300 rounded-full text-black font-medium px-12 py-2 border-0 text-lg mb-10 items-center">
+            <a href="https://amor.com"> 💚 APROVEITE A JORNADA  </a>
         </button>
-        <h1 class="text-center text-6xl p-48 flex items-center justify-center font-sora font-bold"> Descubra o que é possível com <br/> o extenso mundo da <br/> criação. </h1>
-    </main>
+        <h1 class="text-6xl font-sora font-bold mb-4">Descubra o que é possível com <br/> o extenso mundo da <br/> criação.</h1>
+        <p class="text-gray-600 text-lg max-w-[800px] mx-auto p-4">Nós criamos o Mapa da Jornada para ajudar na sua jornada de aprendizado. Um mapeamento das principais demandas exigidas pelo mercado, com sugestões, evidências e opiniões.</p>
+    </div>
+</main>
+
+<div class="w-auto h-[800px] bg-black/10 rounded shadow px-64 py-16 flex flex-col">
+
+    <button class="max-w-[800px] mx-auto bg-green-300 rounded-full text-black font-medium px-12 py-2 border-0 text-lg mb-10 items-center">
+        <a href="https://amor.com"> 💚 PANORAMA GERAL </a>
+    </button>
+    
+    <h1 class="text-6xl font-bold"> Informática para Internet </h1>
+    <h2 class="text-4xl mt-2 mb-4 font-medium"> Curso: Técnico Integrado </h2> 
+    
+    <div class="desc flex my-4 w-full 4xl">
+        <h3 class="4xl mr-4"><strong> Carga horária: </strong> <br /> 3995h </h3>
+        <h3 class="4xl mr-4"><strong> Duração: </strong> <br /> Quatro anos </h3>
+        <h3 class="4xl mr-4"><strong> Tipo de ensino: </strong> <br /> Presencial </h3>
+        <h3 class="4xl mr-4"><strong> Oferta em: </strong> <br /> <a href="https://site.com"> Natal-Central </a> | <a href="https://site.com">Natal-Zona Norte</a> | <a href="https://natal.com">São Paulo do Potengi</a></h3>
+    </div> <!-- descrição do curso de info -->
+
+    <div class="border-t-2 border-black my-4"></div>
+
+    
+</div> 
 {% endblock content %}
