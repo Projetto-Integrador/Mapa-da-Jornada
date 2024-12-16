@@ -10,3 +10,6 @@ def login(request):
 
 def registre(request):
     return render(request, 'registre.html')
+
+def fundamento(request):
+    return render(request, 'fundamento.html')
