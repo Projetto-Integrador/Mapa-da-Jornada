@@ -12,7 +12,7 @@
         <p class="text-gray-600 text-lg max-w-[800px] mx-auto p-4">Nós criamos o Mapa da Jornada para ajudar na sua jornada de aprendizado. Um mapeamento das principais demandas exigidas pelo mercado, com sugestões, evidências e opiniões.</p>
     </div>
 </main>
-<div class="w-auto h-[1200px] bg-black/10 rounded shadow px-64 py-16 flex flex-col">
+<div class="w-auto h-full bg-black/10 rounded shadow px-96 py-16 flex flex-col">
 
     <button class="max-w-[800px] mx-auto bg-green-300 rounded-full text-black font-medium px-12 py-2 border-0 text-lg mb-10 items-center">
         <a href="https://amor.com"> 💚 PANORAMA GERAL </a>
@@ -29,55 +29,56 @@
     <div class="border-t-2 border-black my-2"></div>
 
     <div class="grid grid-cols-[300px_1fr] gap-4 h-full">
-        <aside class="h-full bg-[#34d399] rounded-2xl mt-2 text-white">
+        <aside class="h-full bg-green-300 rounded-2xl mt-2 text-white">
             <div class="m-4 text-black">
-                <h2 class="text-3xl font-bold text-blac">Período letivo</h2>
-                <p class="mt-2">Em qual ano letivo você se encontra?</p>
-                <ul class="mt-4">
-                  <li><a href="#" class="text-black text-xl">Primeiro ano</a></li>
-                    <li><a href="#" class="text-black text-xl">Segundo ano</a></li>
-                    <li><a href="#" class="text-black text-xl">Terceiro ano</a></li>
-                    <li><a href="#" class="text-black text-xl">Quarto ano</a></li>
+                <h2 class="text-3xl font-bold text-black">Período letivo</h2>
+                <p class="mt-2 text-xl">Em qual ano letivo você se encontra?</p>
+                <ul class="mt-6 gap-4">
+                    <li><a href="#" class="text-black text-lg border-b-2 border-black pb-0.2">Primeiro ano</a></li>
+                    <li><a href="#" class="text-black text-lg border-b-2 border-black pb-0.2">Segundo ano</a></li>
+                    <li><a href="#" class="text-black text-lg border-b-2 border-black pb-0.2">Terceiro ano</a></li>
+                    <li><a href="#" class="text-black text-lg border-b-2 border-black pb-0.2">Quarto ano</a></li>
                 </ul>
             </div>
         </aside>
 
         <div class="grid content-start gap-4 mt-2 rounded-2xl">
-            <div class="bg-green-300 h-48 rounded-2xl p-4 relative overflow-hidden flex flex-col">
+
+            <div class="bg-green-300 h-56 rounded-2xl p-4 relative overflow-hidden flex flex-col">
                 <div class="flex-1">
-                    <h2 class="text-xl">Introdução à Lógica e Algoritmos</h2>
+                    <h2 class="text-xl font-bold">Fundamentos de Lógica e Algoritmos</h2>
                     <h3 class="py-2">Carga horária: 300h</h3>
                 </div>
-                <button class="bg-black text-white rounded-lg w-[20%] px-2 py-2 hover:bg-black mt-auto">
+                <button class="bg-black text-white rounded-lg w-[30%] px-2 py-4 hover:bg-black mt-auto">
                     <a href="{% url 'fundamento' %}">Ver Mais</a>
                 </button>
+                <img src="https://fastly.picsum.photos/id/479/200/200.jpg?hmac=VH6eGzugyQKHVUXvN1fcPAfAN5PbTkE8Tf22vb6JuG8" alt="Descrição da imagem" class="z-0 absolute top-0 right-0 h-full w-1/3 object-cover">
+            </div>
+    
+            <div class="bg-green-300 h-56 rounded-2xl p-4 relative overflow-hidden flex flex-col">
+                <div class="flex-1">
+                    <h2 class="text-xl font-bold">Princípios de Design e Projeto Gráfico</h2>
+                    <h3 class="py-2">Carga horária: 300h</h3>
+                </div>
+                <button class="bg-black text-white rounded-lg w-[30%] px-2 py-4 hover:bg-black mt-auto">Ver Mais</button>
                 <img src="https://fastly.picsum.photos/id/479/200/200.jpg?hmac=VH6eGzugyQKHVUXvN1fcPAfAN5PbTkE8Tf22vb6JuG8" alt="Descrição da imagem" class="absolute top-0 right-0 h-full w-1/3 object-cover">
             </div>
     
-            <div class="bg-green-300 h-48 rounded-2xl p-4 relative overflow-hidden flex flex-col">
+            <div class="bg-green-300 h-56 rounded-2xl p-4 relative overflow-hidden flex flex-col">
                 <div class="flex-1">
-                    <h2 class="text-xl">Princípios de Design e Projeto Gráfico</h2>
+                    <h2 class="text-xl font-bold">Informática</h2>
                     <h3 class="py-2">Carga horária: 300h</h3>
                 </div>
-                <button class="bg-black text-white rounded-lg w-[20%] px-2 py-2 hover:bg-black mt-auto">Ver Mais</button>
+                <button class="bg-black text-white rounded-lg w-[30%] px-2 py-4 hover:bg-black mt-auto">Ver Mais</button>
                 <img src="https://fastly.picsum.photos/id/479/200/200.jpg?hmac=VH6eGzugyQKHVUXvN1fcPAfAN5PbTkE8Tf22vb6JuG8" alt="Descrição da imagem" class="absolute top-0 right-0 h-full w-1/3 object-cover">
             </div>
-    
-            <div class="bg-green-300 h-48 rounded-2xl p-4 relative overflow-hidden flex flex-col">
-                <div class="flex-1">
-                    <h2 class="text-xl">Informática</h2>
-                    <h3 class="py-2">Carga horária: 300h</h3>
-                </div>
-                <button class="bg-black text-white rounded-lg w-[20%] px-2 py-2 hover:bg-black mt-auto">Ver Mais</button>
-                <img src="https://fastly.picsum.photos/id/479/200/200.jpg?hmac=VH6eGzugyQKHVUXvN1fcPAfAN5PbTkE8Tf22vb6JuG8" alt="Descrição da imagem" class="absolute top-0 right-0 h-full w-1/3 object-cover">
-            </div>
-        </div>
-                
-        
 
+        </div>
         
     </div>
     
-</div> 
+</div>
+
+
 
 {% endblock content %}
