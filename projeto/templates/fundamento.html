@@ -1,78 +1,104 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
+    <main class="px-32 py-12">
+        <!-- Seção Fundamentos de Lógica e Algoritmos -->
+        <h1 class="text-5xl  font-sora font-bold w-[100%]"> Fundamentos </br> de Lógica e Algoritmos</h1>
+          
+        <p class="text-gray-600 mb-6 mt-8 w-[40%] text-justify">
+          Estudar Fundamentos de Lógica e Algoritmos é essencial para quem se
+          interessa por programação, ciência da computação e engenharia.
+          Essa disciplina desenvolve habilidades de raciocínio lógico e
+          resolução de problemas, fundamentais em um mundo tecnológico. Você
+          aprenderá a analisar argumentos, identificar premissas e aplicar
+          regras lógicas, o que aprimora o pensamento crítico e a
+          construção de algoritmos.
+        </p>
 
-
-    <!-- Conteúdo principal -->
-    <main class="container mx-auto mt-8 px-4">
-      <section class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center relative">
-        <!-- Texto -->
-        <div>
-          <h1 class="text-3xl font-bold mb-4">Fundamentos de Lógica e Algoritmos</h1>
-          <p class="text-gray-600 mb-6">
-            Estudar Fundamentos de Lógica e Algoritmos é essencial para quem se
-            interessa por programação, ciência da computação e engenharia.
-            Essa disciplina desenvolve habilidades de raciocínio lógico e
-            resolução de problemas, fundamentais em um mundo tecnológico. Você
-            aprenderá a analisar argumentos, identificar premissas e aplicar
-            regras lógicas, o que aprimora o pensamento crítico e a
-            construção de algoritmos.
-          </p>
-          <button
-            class="bg-green-500 text-white font-semibold px-6 py-3 rounded-lg hover:bg-green-600 transition"
+        <button
+          class="bg-green-500 text-white font-semibold px-12 py-3 rounded-lg hover:bg-green-600 transition"
           >
-            INSCREVA-SE
-          </button>
-        </div>
-
-        <div class="relative flex items-center justify-center">
-            <!-- Forma geométrica -->
-            <div
-              class="w-72 h-72 bg-green-300 rounded-lg absolute"
-              style="
-                clip-path: polygon(0% 20%, 100% 0%, 100% 80%, 0% 100%);
-                transform: rotate(15deg);
-              "
-            ></div>
-          
-            <!-- Texto sobreposto -->
-            <div class="relative text-white font-bold text-2xl text-center z-10">
-              ARTIGO <br />
-              LÓGICA DE PROGRAMAÇÃO
-            </div>
-          </div>
-          
+          INSCREVA-SE
+        </button>
 
       <!-- Benefícios -->
       <section class="mt-12">
         <div class="border-t border-gray-200 pt-6">
           <div class="flex flex-col md:flex-row justify-between">
+
             <div class="flex items-start mb-4 md:mb-0">
               <span class="text-green-500 font-bold text-2xl mr-3">•</span>
               <div>
                 <h2 class="font-bold mb-1">Formação completa!</h2>
                 <p class="text-gray-600 text-sm">
-                  5 cursos em 10 meses, com mais de 40 horas de aula online –
-                  estude no seu tempo.
+                  São quatro anos de completo aprendizado –
+                  você aprenderá de tudo!
+                </p>
+              </div>
+            </div>
+            <div class="flex items-start mb-4 md:mb-0">
+              <span class="text-green-500 font-bold text-2xl mr-3">•</span>
+              <div>
+                <h2 class="font-bold mb-1">Mercado de trabalho</h2>
+                <p class="text-gray-600 text-sm">
+                  Através dos conhecimentos ensinados no curso, você estará apto ao mercado de trabalho.
+                </p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <span class="text-green-500 font-bold text-2xl mr-3">•</span>
+              <div>
+                <h2 class="font-bold mb-1">Teoria e Prática</h2>
+                <p class="text-gray-600 text-sm">
+                  Você será avaliado tanto na teoria quanto na prática.
                 </p>
               </div>
             </div>
 
-            <div class="flex items-start">
-              <span class="text-green-500 font-bold text-2xl mr-3">•</span>
-              <div>
-                <h2 class="font-bold mb-1">Prática e Mentoria</h2>
-                <p class="text-gray-600 text-sm">
-                  Atividades ao longo do curso e feedback individual do tutor.
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
     </main>
-  </body>
-</html>
+
+    <section class="bg-green-500 px-32 py-24 flex">
+      <div class="secao-texto w-[50%]">
+        <h1 class="text-5xl uppercase  font-bold font-sora mr-8"> Uma carreira promissora e <br/> bem paga </h1>
+        <div class="secao-texto-dois w-[70%]">
+          <p class="text-base mt-8 text-white"> <b class="text-black"> Em alta:</b> uma das 10 profissões mais bem pagas da atualidade </p>
+          <p class="text-base mt-6 text-white"> <b class="text-black"> O futuro é agora. </b> Num mundo conectado, empresas necessitam de programadores para atender a alta demanda por tecnologia.</p>
+          <p class="text-base mt-6 text-white"> <b class="text-black"> Salários competitivos. </b> Com salários acima da média em comparação com outras profissões, programadores reinam o ranking dos profissionais mais bem pagos, refletindo a importância de suas habilidades no mercado.</p>
+          <p class="text-base mt-6 text-white"> <b class="text-black"> Oportunidades e Carreira</b>  A carreira de programação oferece diversas oportunidades de crescimento. Programadores podem avançar para cargos de liderança, como gerentes de projeto ou arquitetos de software, ou especializar-se em áreas de alta demanda, como segurança cibernética ou ciência de dados, aumentando ainda mais seu potencial de ganhos.</p>
+          <h1 class="text-2xl text-white font-bold font-sora mt-12">Deseja saber mais sobre <b class="text-black"> Carreiras e Profissões </b> de alguém com conhecimento em <b class="text-black">Lógica e Algoritmos? </b><button class="mt-6 bg-black font-sora text-white uppercase font-bold px-12 py-4 rounded-lg hover:bg-green-700 transition"><a href="#">Ver mais</a> </button> </h1>
+        </div>
+      </div>
+      
+      <div class="imagem w-[50%]"><img class="" src="{% static 'assets/imagens/mostrarsalarios.png' %}" alt="Descrição da imagem" class="w-auto h-auto"></div>
+    </section>
+
+    <section class="px-32 py-24">
+      <div class="secao-texto w-[50%]">
+        <h1 class="text-5xl uppercase  font-bold font-sora mr-8"> Para quem este curso é indicado?</h1>
+      </div>
+        
+    <dl class="mt-12 w-[30%] text-justify">
+        <dt class="text-2xl mb-2 font-semibold">1. Qualquer pessoa</dt>
+        <dd class="mb-8">Refere-se a indivíduos de todas as idades e origens que desejam aprender e se beneficiar do conhecimento em informática e internet, independentemente de sua formação ou experiência prévia.</dd>
+    
+        <dt class="text-2xl mb-2 font-semibold">2. Para aqueles que aspiram pelo conhecimento</dt>
+        <dd class="mb-8">Destina-se a pessoas que têm um desejo genuíno de aprender e expandir suas habilidades, buscando adquirir novos conhecimentos que possam ser aplicados em diversas áreas da vida pessoal e profissional.</dd>
+    
+        <dt class="text-2xl mb-2 font-semibold">3. Futuros empreendedores</dt>
+        <dd class="mb-8">Jovens ou adultos que têm a intenção de iniciar seus próprios negócios e que reconhecem a importância da tecnologia e da internet para o sucesso de suas iniciativas, buscando habilidades que os ajudem a desenvolver e gerenciar suas ideias.</dd>
+    
+        <dt class="text-2xl mb-2 font-semibold">4. Interessados em computadores e internet</dt>
+        <dd class="mb-8">Pessoas que têm curiosidade sobre como funcionam os computadores e a internet, e que desejam entender melhor essas ferramentas para utilizá-las de forma mais eficaz em suas atividades diárias.</dd>
+    
+        <dt class="text-2xl mb-2 font-semibold">5. Aspirantes à área de Tecnologia e Inovação</dt>
+        <dd class="mb-8">Indivíduos que desejam seguir uma carreira nas áreas de tecnologia, ciência da computação ou inovação, buscando adquirir as habilidades e conhecimentos necessários para se destacar em um mercado de trabalho em constante evolução.</dd>
+    </dl>
+    
+    </section>
+    
 
 
 {% endblock content %}
