@@ -13,3 +13,6 @@ def registre(request):
 
 def fundamento(request):
     return render(request, 'fundamento.html')
+
+def meuscursos(request):
+    return render(request, 'meuscursos.html')

@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<main class="px-4 sm:px-8 md:px-16 lg:px-32 py-6 sm:py-8 md:py-10 lg:py-12">
+    <section class="mensagem flex items-center">
+        <h1 class="text-2xl font-bold font-sora"> Olá, caro aluno! </h1>
+        <p class="text-lg ml-4 w-[40%]">Em um mundo em constante mudança, o aprendizado é a nossa bússola permanente.</p>
+    </section>
+
+    <section class="cursosinscritos ">
+        <div class="textoselecao">
+            <h1 class="text-2xl font-bold font-sora mt-12"> Cursos inscritos </h1>
+        </div>
+
+    </section>
+
+    <section class="sobrearea mt-32">
+        <section class="mensagem flex items-center">
+            <h1 class="text-2xl font-bold font-sora"> Sobre a área </h1>
+        </section>
+        <!-- component -->
+        <div class="grid gap-10 md:grid-cols-3 mx-auto max-w-6xl gap-0 mt-6">
+            <div class="relative grid h-[40rem] w-full max-w-[28rem] flex-col items-end justify-center overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700 p-4 md:p-6">
+                <div class="absolute inset-0 m-0 h-full w-full overflow-hidden rounded-none bg-transparent bg-[url('https://images.unsplash.com/photo-1552960562-daf630e9278b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80')] bg-cover bg-clip-border bg-center text-gray-700 shadow-none">
+                    <div class="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-t from-black/80 via-black/50"></div>
+                </div>
+                <div class="relative p-6 py-12 px-6 md:px-12">
+                    <h2 class="mb-6 block font-sans text-xl md:text-2xl lg:text-4xl font-medium leading-[1.5] tracking-normal text-white antialiased">Tendências para TI em 2025?</h2>
+                    <h5 class="mb-4 block font-sans text-base md:text-lg lg:text-xl font-semibold leading-snug tracking-normal text-gray-400 antialiased"> Thierry Henry </h5>
+                    <img
+                        alt="tania andrew"
+                        src="https://i.postimg.cc/FsxdLjMW/312548-HHRIa-FMYcnp-O.jpg"
+                        class="relative inline-block h-[74px] w-[74px] rounded-full border-2 border-white object-cover object-center"
+                    />
+                </div>
+            </div>
+
+            <div class="relative grid h-[40rem] w-full max-w-[28rem] flex-col items-end justify-center overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700 p-4 md:p-6">
+                <div class="absolute inset-0 m-0 h-full w-full overflow-hidden rounded-none bg-transparent bg-[url('https://images.unsplash.com/photo-1552960562-daf630e9278b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80')] bg-cover bg-clip-border bg-center text-gray-700 shadow-none">
+                    <div class="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-t from-black/80 via-black/50"></div>
+                </div>
+                <div class="relative p-6 py-12 px-6 md:px-12">
+                    <h2 class="mb-6 block font-sans text-xl md:text-2xl lg:text-4xl font-medium leading-[1.5] tracking-normal text-white antialiased">10 ANOS depois... Valeu a pena estudar programação?</h2>
+                    <h5 class="mb-4 block font-sans text-base md:text-lg lg:text-xl font-semibold leading-snug tracking-normal text-gray-400 antialiased"> Thierry Henry </h5>
+                    <img
+                        alt="tania andrew"
+                        src="https://i.postimg.cc/FsxdLjMW/312548-HHRIa-FMYcnp-O.jpg"
+                        class="relative inline-block h-[74px] w-[74px] rounded-full border-2 border-white object-cover object-center"
+                    />
+                </div>
+            </div>
+
+            <div class="relative grid h-[40rem] w-full max-w-[28rem] flex-col items-end justify-center overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700 p-4 md:p-6">
+                <div class="absolute inset-0 m-0 h-full w-full overflow-hidden rounded-none bg-transparent bg-[url('https://images.unsplash.com/photo-1552960562-daf630e9278b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80')] bg-cover bg-clip-border bg-center text-gray-700 shadow-none">
+                    <div class="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-t from-black/80 via-black/50"></div>
+                </div>
+                <div class="relative p-6 py-12 px-6 md:px-12">
+                    <h2 class="mb-6 block font-sans text-xl md:text-2xl lg:text-4xl font-medium leading-[1.5] tracking-normal text-white antialiased">Como se preparar para entrevistas técnicas</h2>
+                    <h5 class="mb-4 block font-sans text-base md:text-lg lg:text-xl font-semibold leading-snug tracking-normal text-gray-400 antialiased"> Jean Lucas </h5>
+                    <img
+                        alt="tania andrew"
+                        src="https://i.postimg.cc/D0T0WZB3/312727-8-Vz-XSg33vy-Oq.jpg"
+                        class="relative inline-block h-[74px] w-[74px] rounded-full border-2 border-white object-cover object-center"
+                    />
+                </div>
+            </div>
+
+            <div class="relative grid h-[40rem] w-full max-w-[28rem] flex-col items-end justify-center overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700 p-4 md:p-6">
+                <div class="absolute inset-0 m-0 h-full w-full overflow-hidden rounded-none bg-transparent bg-[url('https://images.unsplash.com/photo-1552960562-daf630e9278b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80')] bg-cover bg-clip-border bg-center text-gray-700 shadow-none">
+                    <div class="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-t from-black/80 via-black/50"></div>
+                </div>
+                <div class="relative p-6 py-12 px-6 md:px-12">
+                    <h2 class="mb-6 block font-sans text-xl md:text-2xl lg:text-4xl font-medium leading-[1.5] tracking-normal text-white antialiased">Como o acaso determina nossas vidas.</h2>
+                    <h5 class="mb-4 block font-sans text-base md:text-lg lg:text-xl font-semibold leading-snug tracking-normal text-gray-400 antialiased"> Eduardo Maurício </h5>
+                    <img
+                        alt="tania andrew"
+                        src="https://i.postimg.cc/BnYjhJQ2/315165-lmz7-Vy-Ph6j-SZ.jpg"
+                        class="relative inline-block h-[74px] w-[74px] rounded-full border-2 border-white object-cover object-center"
+                    />
+                </div>
+            </div>
+
+
+
+    
+    <!-- <div class="max-w-screen-xl mx-auto m-6 relative">
+        <div class="grid grid-cols-1 sm:grid-cols-12 gap-10">
+
+            <div class="sm:col-span-12 lg:col-span-3">
+                <a href="#">
+                    <div class="h-72 bg-cover text-center"
+                        style="background-image: url('https://tailwindcss.com/img/card-left.jpg')"
+                        title="Neymar">
+                    </div>
+                </a>
+                <div
+                    class="mt-3 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-between leading-normal">
+                    <div class="">
+                        <a href="#"
+                            class="text-xs text-indigo-600 uppercase font-medium flex items-center hover:text-gray-900 transition duration-500 ease-in-out">
+                            DINHEIRO
+                        </a>
+                        <a href="#"
+                            class="text-gray-900 font-bold text-lg mb-2 hover:text-indigo-600 transition duration-500 ease-in-out">
+                            Tendências de TI para 2025 </a>
+                        <p class="text-gray-700 text-lg mt-2">Em 2025, as tendências em tecnologia da informação (TI) estarão focadas na inteligência artificial e na automação, promovendo eficiência e segurança cibernética. A computação em nuvem e a edge computing oferecerão flexibilidade, enquanto a sustentabilidade e a ética na tecnologia se tornarão prioridades.
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+    
+            
+        </div>
+    </div>
+     -->
+
+</main>
+{% endblock content %}
