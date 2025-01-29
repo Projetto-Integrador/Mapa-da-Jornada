@@ -8,7 +8,7 @@
         <button class="max-w-[800px] mx-auto bg-green-300 rounded-full text-black font-medium px-12 py-2 border-0 text-lg mb-10 items-center">
             <a href="https://amor.com"> 💚 APROVEITE A JORNADA  </a>
         </button>
-        <h1 class="text-6xl font-sora font-bold mb-4">Descubra o que é possível com <br/> o extenso mundo da <br/> crição.</h1>
+        <h1 class="text-6xl font-sora font-bold mb-4">Descubra o que é possível com <br/> o extenso mundo da <br/> criação.</h1>
         <p class="text-gray-600 text-lg max-w-[800px] mx-auto p-4">Nós criamos o Mapa da Jornada para ajudar na sua jornada de aprendizado. Um mapeamento das principais demandas exigidas pelo mercado, com sugestões, evidências e opiniões.</p>
     </div>
 </main>
@@ -19,9 +19,9 @@
     </button>
     
     <h1 class="text-6xl font-bold"> Informática para Internet </h1>
-    <h2 class="text-4xl mt-2 mb-4 font-medium"> Forma: Técnico Integrado </h2> 
     <div class="desc flex my-4 w-full"> 
         <h3 class="mr-4"><strong> Carga horária: </strong> <br /> 3995h </h3>
+        <h3 class="mr-4"><strong> Modalidade: </strong> <br /> Técnico Integrado </h3>
         <h3 class="mr-4"><strong> Duração: </strong> <br /> Quatro anos </h3>
         <h3 class="mr-4"><strong> Tipo de ensino: </strong> <br /> Presencial </h3>
         <h3 class="mr-4"><strong> Oferta em: </strong> <br /> <a class="underline" href="https://site.com"> Natal-Central </a> | <a class="underline" href="https://site.com">Natal-Zona Norte</a> | <a class="underline" href="https://natal.com">São Paulo do Potengi</a></h3>
@@ -58,14 +58,14 @@
 
         <div class="grid content-start gap-4 mt-2 rounded-2xl">
             <div id="materias" class="bg-green-300 h-56 rounded-2xl p-4 relative overflow-hidden flex flex-col">
-                <h2 class="text-xl font-bold">Selecione um ano para ver as matérias</h2>
+                <h2 class="text-xl font-bold">Primeiro Período</h2>
             </div>
         </div>
     </div>
 
-    <div class="enfim mt-12 cor">
+    <div class="enfim mt-12 cor rounded-2xl">
         <section class="w-[100%] mx-auto cor p-8 rounded-lg">
-            <div class="intercar w-[50%]">
+            <div class="intercar w-[70%]">
                 <h1 class="text-3xl text-white"> O que o <b class="text-black">Instituto Federal</b> proporciona em termos de aprendizagem e desenvolvimento dos futuros técnicos em <b class="text-black">Informática para Internet? </b> </h1>
                 <p class="mt-4 text-base">Você receberá total apoio e assistência de nossos professores. Juntos, vocês construirão seu currículo, seu portfólio e seu plano de carreira. Tudo isso o ajudará a encontrar um emprego mais rapidamente. Selecionaremos vagas atraentes para você e lhe daremos prioridade sobre outras pessoas em busca de emprego entre nossos parceiros.</p>
             </div><!--intercal-->
@@ -73,27 +73,22 @@
             <div class="cards">
                 <h1 class="text-white font-medium mt-12 text-2xl"> O que o curso proporciona? </h1>
                 <div class="cardsdiv flex justify-between mt-6 gap-6">
-                    <div class="card py-8 rounded-lg bg-gray-300 flex flex-col px-8 w-1/5">
+                    <div class="card py-8 rounded-lg bg-gray-300 flex flex-col px-8 w-1/4">
                         <img src="" class="mb-4">
                         <h2 class="card-title text-white">Criação de Portfólio</h2>
                     </div><!--fim card-->
                 
-                    <div class="card py-8 rounded-lg bg-gray-300 flex flex-col px-8 w-1/5">
+                    <div class="card py-8 rounded-lg bg-gray-300 flex flex-col px-8 w-1/4">
                         <img src="" class="mb-4">
                         <h2 class="card-title text-white">Plano de Carreira</h2>
                     </div><!--fim card-->
                 
-                    <div class="card py-8 rounded-lg bg-gray-300 flex flex-col px-8 w-1/5">
+                    <div class="card py-8 rounded-lg bg-gray-300 flex flex-col px-8 w-1/4">
                         <img src="" class="mb-4">
                         <h2 class="card-title text-white">Práticas em Laboratório</h2>
                     </div><!--fim card-->
                 
-                    <div class="card py-8 rounded-lg bg-gray-300 flex flex-col px-8 w-1/5">
-                        <img src="" class="mb-4">
-                        <h2 class="card-title text-white">Conexões com pessoas e empresas</h2>
-                    </div><!--fim card-->
-
-                    <div class="card py-8 rounded-lg bg-gray-300 flex flex-col px-8 w-1/5">
+                    <div class="card py-8 rounded-lg bg-gray-300 flex flex-col px-8 w-1/4">
                         <img src="" class="mb-4">
                         <h2 class="card-title text-white">Conexões com pessoas e empresas</h2>
                     </div><!--fim card-->
@@ -105,66 +100,62 @@
             </div><!--cards-->
         </section> <!-- seção-->
     </div>
-
-    <script>
-        const materiasPorAno = {
-            primeiro: [
-                { nome: 'Matemática I', cargaHoraria: '300h', url: '{% url "fundamento" %}' },
-                { nome: 'Português I', cargaHoraria: '300h', url: '{% url "fundamento" %}' },
-                { nome: 'História', cargaHoraria: '300h', url: '{% url "fundamento" %}' },
-                { nome: 'Geografia', cargaHoraria: '300h', url: '{% url "fundamento" %}' }
-            ],
-            segundo: [
-                { nome: 'Matemática II', cargaHoraria: '300h', url: '{% url "fundamento" %}' },
-                { nome: 'Português II', cargaHoraria: '300h', url: '{% url "fundamento" %}' },
-                { nome: 'Biologia', cargaHoraria: '300h', url: '{% url "fundamento" %}' },
-                { nome: 'Física', cargaHoraria: '300h', url: '{% url "fundamento" %}' }
-            ],
-            terceiro: [
-                { nome: 'Matemática III', cargaHoraria: '300h', url: '{% url "fundamento" %}' },
-                { nome: 'Português III', cargaHoraria: '300h', url: '{% url "fundamento" %}' },
-                { nome: 'Química', cargaHoraria: '300h', url: '{% url "fundamento" %}' },
-                { nome: 'Educação Física', cargaHoraria: '300h', url: '{% url "fundamento" %}' }
-            ],
-            quarto: [
-                { nome: 'Matemática IV', cargaHoraria: '300h', url: '{% url "fundamento" %}' },
-                { nome: 'Português IV', cargaHoraria: '300h', url: '{% url "fundamento" %}' },
-                { nome: 'Literatura', cargaHoraria: '300h', url: '{% url "fundamento" %}' },
-                { nome: 'Arte', cargaHoraria: '300h', url: '{% url "fundamento" %}' }
-            ]
-        };
-
-        function mostrarMaterias(anoSelecionado) {
-            const materiasDiv = document.getElementById('materias');
-            materiasDiv.innerHTML = ''; // Limpa as matérias anteriores
-
-            if (anoSelecionado) {
-                const materias = materiasPorAno[anoSelecionado];
-                materias.forEach(materia => {
-                    const div = document.createElement('div');
-                    div.className = 'bg-green-300 h-56 rounded-2xl p-4 relative overflow-hidden flex flex-col mb-4';
-                    div.innerHTML = `
-                        <div class="flex-1">
-                            <h2 class="text-xl font-bold">${materia.nome}</h2>
-                            <h3 class="py-2">Carga horária: ${materia.cargaHoraria}</h3>
-                        </div>
-                        <button class="bg-black text-bold text-white rounded-lg w-[30%] px-2 py-4 hover:bg-black mt-auto">
-                            <a href="${materia.url}">Ver mais</a>
-                        </button>
-                        <img src="https://fastly.picsum.photos/id/479/200/200.jpg?hmac=VH6eGzugyQKHVUXvN1fcPAfAN5PbTkE8Tf22vb6JuG8" alt="Descrição da imagem" class="z-0 absolute top-0 right-0 h-full w-1/3 object-cover">
-                    `;
-                    materiasDiv.appendChild(div);
-                });
-            }
-        }
-    </script>
-
-
-        
+       
     </div>
     
 </div>
 
+<script>
+    const materiasPorAno = {
+        primeiro: [
+            { nome: 'Fundamentos de Lógica e Algoritmos', cargaHoraria: '300h', url: '{% url "fundamento" %}' },
+            { nome: 'Princípios de WebDesign', cargaHoraria: '300h', url: '{% url "fundamento" %}' },
+            { nome: 'História', cargaHoraria: '300h', url: '{% url "fundamento" %}' },
+            { nome: 'Geografia', cargaHoraria: '300h', url: '{% url "fundamento" %}' }
+        ],
+        segundo: [
+            { nome: 'Matemática II', cargaHoraria: '300h', url: '{% url "fundamento" %}' },
+            { nome: 'Português II', cargaHoraria: '300h', url: '{% url "fundamento" %}' },
+            { nome: 'Biologia', cargaHoraria: '300h', url: '{% url "fundamento" %}' },
+            { nome: 'Física', cargaHoraria: '300h', url: '{% url "fundamento" %}' }
+        ],
+        terceiro: [
+            { nome: 'Matemática III', cargaHoraria: '300h', url: '{% url "fundamento" %}' },
+            { nome: 'Português III', cargaHoraria: '300h', url: '{% url "fundamento" %}' },
+            { nome: 'Química', cargaHoraria: '300h', url: '{% url "fundamento" %}' },
+            { nome: 'Educação Física', cargaHoraria: '300h', url: '{% url "fundamento" %}' }
+        ],
+        quarto: [
+            { nome: 'Matemática IV', cargaHoraria: '300h', url: '{% url "fundamento" %}' },
+            { nome: 'Português IV', cargaHoraria: '300h', url: '{% url "fundamento" %}' },
+            { nome: 'Literatura', cargaHoraria: '300h', url: '{% url "fundamento" %}' },
+            { nome: 'Arte', cargaHoraria: '300h', url: '{% url "fundamento" %}' }
+        ]
+    };
 
+    function mostrarMaterias(anoSelecionado) {
+        const materiasDiv = document.getElementById('materias');
+        materiasDiv.innerHTML = ''; // Limpa as matérias anteriores
+
+        if (anoSelecionado) {
+            const materias = materiasPorAno[anoSelecionado];
+            materias.forEach(materia => {
+                const div = document.createElement('div');
+                div.className = 'bg-green-300 h-56 rounded-2xl p-4 relative flex flex-col mb-4';
+                div.innerHTML = `
+                    <div class="flex-1">
+                        <h2 class="text-xl font-bold">${materia.nome}</h2>
+                        <h3 class="py-2">Carga horária: ${materia.cargaHoraria}</h3>
+                    </div>
+                    <button class="bg-black text-bold text-white rounded-lg w-[30%] px-2 py-4 hover:bg-black mt-auto">
+                        <a href="${materia.url}">Ver mais</a>
+                    </button>
+                    <img src="https://fastly.picsum.photos/id/479/200/200.jpg?hmac=VH6eGzugyQKHVUXvN1fcPAfAN5PbTkE8Tf22vb6JuG8" alt="Descrição da imagem" class="z-0 absolute top-0 right-0 h-full w-1/3 object-cover">
+                `;
+                materiasDiv.appendChild(div);
+            });
+        }
+    }
+</script>
 
 {% endblock content %}
