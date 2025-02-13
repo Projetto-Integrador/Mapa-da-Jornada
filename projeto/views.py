@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from .models import Curso 
 
 def index(request):
-    dados_usuario = {"nome": "Jean Ficara com Minecraft", "idade": 24}
+    
     return render(request, "index.html", dados_usuario) 
 
 def login(request):
