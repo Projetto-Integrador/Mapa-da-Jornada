@@ -1,7 +1,9 @@
 from django.db import models
 
-class Projeto(models.Model):
+class Curso(models.Model):
     nome = models.CharField(max_length=100)
-
-    def str (self):
+    descricao = models.TextField()
+    duracao = models.PositiveIntegerField()  
+    
+    def __str__(self):
         return self.nome

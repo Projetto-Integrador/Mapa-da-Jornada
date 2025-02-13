@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
-from .models import Projeto 
+from .models import Curso 
 
 def index(request):
     dados_usuario = {"nome": "Jean Ficara com Minecraft", "idade": 24}
@@ -17,6 +17,9 @@ def fundamento(request):
 
 def meuscursos(request):
     return render(request, 'meuscursos.html')
+
+
+
 
 def criar_curso(request):
     if request.method == 'POST':
