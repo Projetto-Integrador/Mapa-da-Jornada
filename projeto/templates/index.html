@@ -15,7 +15,7 @@
 <div class="w-auto h-full bg-black/10 rounded shadow px-64 py-16 flex flex-col">
 
     <button class="max-w-[800px] mx-auto bg-green-300 rounded-full text-black font-medium px-12 py-2 border-0 text-lg mb-10 items-center">
-        <a href="https://amor.com"> 💚 PANORAMA GERAL </a>
+        <a href="{% url 'criar_curso' %}"> 💚 PANORAMA GERAL </a>
     </button>
     
     <h1 class="text-6xl font-bold"> Informática para Internet </h1>
@@ -156,6 +156,8 @@
             });
         }
     }
+
+    
 </script>
 
 {% endblock content %}

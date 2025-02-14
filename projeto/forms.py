@@ -6,4 +6,3 @@ class InscricaoForm(forms.ModelForm):
         model = Inscricao
         fields = ['nome_aluno', 'email_aluno', 'curso'] 
 
-    curso = forms.ModelChoiceField(queryset=Curso.objects.all(), empty_label="Escolha um curso", widget=forms.Select)
