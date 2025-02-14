@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
-from .models import Curso 
+from .models import Curso, Disciplina, Professor, Material, UsuarioAvulso, Aluno, AlunoCurso
 
 def index(request):
     
@@ -19,7 +19,9 @@ def meuscursos(request):
     return render(request, 'meuscursos.html')
 
 
-
+def listar_curso(request):
+    cursos = Curso.objects.all()
+    return JsonResponse(list(cursos.values()), safe=False)
 
 def criar_curso(request):
     if request.method == 'POST':

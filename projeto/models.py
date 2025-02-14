@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Curso(models.Model):
     nome = models.CharField(max_length=100)
     descricao = models.TextField(1500)
@@ -21,12 +22,13 @@ class Disciplina(models.Model):
 class Professor(models.Model):
     nome = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
+    descricao = models.TextField(1500)
     telefone = models.CharField(max_length=15)
     disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE)
     foto = models.ImageField(upload_to='fotos/') #inserir foto no diretório fotos
     
     def __str__(self):
-        return f"{self.nome} - {self.email} "
+        return f"{self.nome} - {self.email} - {self.descricao} "
 
 class Material(models.Model):
     nome = models.CharField(max_length=100)
@@ -46,11 +48,11 @@ class UsuarioAvulso (models.Model):
         return f"{self.nome} - {self.email}"    
 
 class Aluno(models.Model):
-    nome = models.ForeignKey(max_length=100)
+    nome = models.ForeignKey(UsuarioAvulso, on_delete=models.CASCADE)
     email = models.EmailField(max_length=100)
     senha = models.CharField(max_length=100)
     curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
-    foto = models.ImageField(upload_to='fotos/') #inserir foto no diretório fotos
+    
     
     def __str__(self):
         return f"{self.nome} - {self.email}"
