@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from .models import Curso, Disciplina, Material, Aluno, AlunoCurso
+from .
 
 def index(request):
     
@@ -27,22 +28,20 @@ def listar_curso(request):
     return JsonResponse(list(cursos.values()), safe=False)
 
 def criar_curso(request):
-    if request.method == 'POST':
-        form = MeuForm(request.POST)
-        if form.is_valid():
-            form.save()  
-            return JsonResponse({'id': curso.id, 'nome': curso.nome, 'descricao': curso.descricao})
-    else:
-        return JsonResponse({'error': 'Erro ao criar curso'}, status=400)
+    if request.method == 'GET':
+        cursos = Curso.objects.all()
+        return render(request, 'criar_curso.html')
 
-    context = {
-        'form': form
-    }
-    return render(request, 'criar_curso', context)
+    elif request.method == 'POST':
+        nome = request.POST.get('nome')
+        descricao = request.POST.get('descricao')
 
-
-    form = cursoForm()
-    return render(request, 'criar_curso.html', {'form': form})
+    curso = 
+        (nome=nome, 
+        descricao=descricao)
+    
+    curso.save()
+    return redirect(criar_curso)
 
 def editar_curso(request, pk):
     curso = get_object_or_404(Curso, pk=pk)
