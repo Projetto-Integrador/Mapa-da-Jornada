@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
-from .models import Curso, Disciplina, Material, Aluno, AlunoCurso
-from .
+from .forms import CursoForm
+from django.contrib import messages
+
 
 def index(request):
     
@@ -23,28 +24,29 @@ def meuscursos(request):
     return render(request, 'meuscursos.html')
 
 
-def listar_curso(request):
-    cursos = Curso.objects.all()
-    return JsonResponse(list(cursos.values()), safe=False)
+
 
 def criar_curso(request):
-    if request.method == 'GET':
-        cursos = Curso.objects.all()
-        return render(request, 'criar_curso.html')
+    if request.method == 'POST':
+        form = CursoForm(request.POST) 
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Curso cadastrado com sucesso!')
+            return redirect('index')
+        else:
+            messages.error(request, 'Erro ao cadastrar Curso!')
+    else:
+        form = CursoForm()  
 
-    elif request.method == 'POST':
-        nome = request.POST.get('nome')
-        descricao = request.POST.get('descricao')
+    return render(request, 'criar_curso.html', {'form': form})
 
-    curso = 
-        (nome=nome, 
-        descricao=descricao)
-    
-    curso.save()
-    return redirect(criar_curso)
+def listar_curso(request):
+    cursos = CursoForm.objects.all()
+    return JsonResponse(list(cursos.values()), safe=False)
+
 
 def editar_curso(request, pk):
-    curso = get_object_or_404(Curso, pk=pk)
+    curso = get_object_or_404(CursoForm, pk=pk)
     if request.method == 'POST':
         form = CursoForm(request.POST, instance=curso)
         if form.is_valid():
@@ -53,6 +55,6 @@ def editar_curso(request, pk):
     return JsonResponse({'error': 'Erro ao editar curso'}, status=400)
 
 def excluir_curso(request, pk):
-    curso = get_object_or_404(Curso, pk=pk)
+    curso = get_object_or_404(CursoForm, pk=pk)
     curso.delete()
     return JsonResponse({'id': pk})

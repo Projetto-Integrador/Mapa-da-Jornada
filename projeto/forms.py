@@ -1,8 +1,16 @@
 from django import forms
-from .models import Curso
+from .models import Curso, Disciplina, Aluno
 
-class InscricaoForm(forms.ModelForm):
+
+
+
+class CursoForm(forms.ModelForm):
     class Meta:
-        model = Inscricao
-        fields = ['nome_aluno', 'email_aluno', 'curso'] 
+        model = Curso
+        fields = "__all__"
+
+class DisciplinaForm(forms.ModelForm):
+    class Meta:
+        model = Disciplina
+        fields = "__all__"
 
