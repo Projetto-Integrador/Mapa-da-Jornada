@@ -6,27 +6,15 @@
   <title>Document</title>
 </head>
 <body>
-  <div class="container">
-    <h1>Criar</h1>
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li style="color: {% if message.tags == 'success' %}green{% else %}red{% endif %};">
-                    {{ message }}
-                </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+    <h1>Criar Curso</h1>
     
     <form action="{% url 'criar_curso' %}" method="POST">
+      
         {% csrf_token %}
+        {{ form.as_p }}
         
-        <label for="nome">Nome do Curso:</label>
-        <input type="text" id="nome" name="nome" required><br><br>
-        
-        <label for="descricao">Descrição:</label><br>
-        <textarea id="descricao" name="descricao" rows="4" cols="30"></textarea><br><br>
       <button type="submit" class="btn btn-primary">Criar</button>
+      
     </form>
   
 </body>

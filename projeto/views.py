@@ -28,17 +28,19 @@ def meuscursos(request):
 
 def criar_curso(request):
     if request.method == 'POST':
-        form = CursoForm(request.POST) 
+        form = CursoForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, 'Curso cadastrado com sucesso!')
             return redirect('index')
         else:
+            print("Erros no formulário:", form.errors)  
             messages.error(request, 'Erro ao cadastrar Curso!')
     else:
-        form = CursoForm()  
+        form = CursoForm()
 
     return render(request, 'criar_curso.html', {'form': form})
+
 
 def listar_curso(request):
     cursos = CursoForm.objects.all()
