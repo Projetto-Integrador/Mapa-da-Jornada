@@ -1,8 +1,5 @@
 from django import forms
-from .models import Curso, Disciplina, Aluno
-
-
-
+from .models import Curso, Disciplina
 
 class CursoForm(forms.ModelForm):
     class Meta:
@@ -12,5 +9,4 @@ class CursoForm(forms.ModelForm):
 class DisciplinaForm(forms.ModelForm):
     class Meta:
         model = Disciplina
-        fields = "__all__"
-
+        fields = ['nome', 'descricao', 'curso']  # Adicionando o campo 'curso'

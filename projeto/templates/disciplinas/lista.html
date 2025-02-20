@@ -1,0 +1,23 @@
+<!-- projeto/templates/disciplinas/lista.html -->
+<h1>Disciplinas</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for disciplina in disciplinas %}
+            <tr>
+                <td>{{ disciplina.nome }}</td>
+                <td>{{ disciplina.descricao }}</td>
+                <td>
+                    <a href="{% url 'projeto:editar_disciplina' pk=disciplina.pk %}">Editar</a> | 
+                    <a href="{% url 'projeto:excluir_disciplina' pk=disciplina.pk %}">Excluir</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
