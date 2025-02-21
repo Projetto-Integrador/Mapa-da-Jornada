@@ -1,7 +1,11 @@
 from django.db import models
 
 class Curso(models.Model):
-    nome = models.CharField(max_length=100)
+    nome = models.CharField(
+        max_length=100, 
+        default="Informática para Internet", 
+        editable=False  # Impede que seja alterado no admin ou em formulários
+    )
     descricao = models.TextField()
 
     def __str__(self):
