@@ -1,24 +1,39 @@
-<!-- projeto/templates/disciplinas/lista.html -->
-<h1>Disciplinas</h1>
-<table>
-    <a href="{% url 'projeto:criar_disciplina' %}">Criar Nova Disciplina</a>
-    <thead>
-        <tr>
-            <th>Nome</th>
-            <th>Descrição</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for disciplina in disciplinas %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://unpkg.com/@material-tailwind/html@latest/styles/material-tailwind.css"/>
+
+</head>
+<body>
+
+    <!-- projeto/templates/disciplinas/lista.html -->
+    <h1>Disciplinas</h1>
+    <table>
+        <a href="{% url 'projeto:criar_disciplina' %}">Criar Nova Disciplina</a>
+        <thead>
             <tr>
-                <td>{{ disciplina.nome }}</td>
-                <td>{{ disciplina.descricao }}</td>
-                <td>
-                    <a href="{% url 'projeto:editar_disciplina' pk=disciplina.pk %}">Editar</a> | 
-                    <a href="{% url 'projeto:excluir_disciplina' pk=disciplina.pk %}">Excluir</a>
-                </td>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Ações</th>
             </tr>
-        {% endfor %}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            {% for disciplina in disciplinas %}
+                <tr>
+                    <td>{{ disciplina.nome }}</td>
+                    <td>{{ disciplina.descricao }}</td>
+                    <td>
+                        <a href="{% url 'projeto:editar_disciplina' pk=disciplina.pk %}">Editar</a> | 
+                        <a href="{% url 'projeto:excluir_disciplina' pk=disciplina.pk %}">Excluir</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</body>
+</html>

@@ -25,7 +25,8 @@
             </div>
             <div class="w-full lg:w-1/2 px-4">
                 <div class="px-6 lg:px-20 py-12 lg:py-24 bg-gray-600 rounded-lg">
-                <form action="#">
+                <form action="{% url 'projeto:login' %}" method="post">
+                    {% csrf_token %}
                     <h3 class="mb-10 text-2xl text-white font-bold font-heading">Registre sua conta</h3>
                     <div class="flex items-center pl-6 mb-3 bg-white rounded-full">
                     <span class="inline-block pr-3 py-2 border-r border-gray-50">
@@ -66,9 +67,9 @@
                     </div>                    
                     <div class="inline-flex mb-10">
                         <input id="link-checkbox" type="checkbox" value="" class="h-4 w-6 mr-2 rounded-full border-green-300 bg-gray-100 text-blue-600 dark:border-green-600 dark:bg-green-700 dark:ring-offset-green-800" />
-                        <p class="-mt-2 text-sm text-gray-200">Ao se inscrever, você concorda com nossos <a class="text-whit" href="#">Termos, Política de Dados </a>e <a class="text-green-500" href="#">Cookies.</a></p>
+                        <p class="-mt-2 text-sm text-gray-200">Ao se inscrever, você concorda com nossos <a class="text-whit" href="{% url 'projeto:login'}">Termos, Política de Dados </a>e <a class="text-green-500" href="#">Cookies.</a></p>
                     </div>
-                    <button class="py-4 w-full bg-green-600 hover:bg-green-400 text-white font-bold rounded-full transition duration-200"><a href="{% url 'login' %}"> Registrar-se </a> </button>
+                    <a href="{% url 'projeto:login' %}"><button class="py-4 w-full bg-green-600 hover:bg-green-400 text-white font-bold rounded-full transition duration-200"> Registrar-se</button> </a> 
                 </form>
                 </div>
             </div>
