@@ -14,7 +14,7 @@
         <aside class="w-[25%] y-full">
             <div class="bg-[#404040] text-white py-8 px-4 rounded-tr-4xl">
 
-                <h1 class="text-3xl font-bold">Fundamentos de Lógica e Algoritmos</h1>
+                <h1 class="text-3xl font-bold">{{ disciplina.nome }}</h1>
                 
             </div>
             <!-- Selecionar Módulo -->
@@ -33,13 +33,11 @@
                         </div> <!-- Fim Módulo -->
                         
                         <div class="topicagem text-white">
-                            {% for topico in modulo.topico_set.all %}
-                            <div class="topico bg-[#CDCDCD] py-6 px-4">
-                                <a href="{% url 'topico_detalhe' topico.id %}">
-                                    <h1 class="text-lg font-bold">{{ topico.nome }}</h1>
-                                </a>
-                            </div>
-                        {% endfor %}
+                            {% for topico in modulo.topico_set_all %}
+                                <div class="topico bg-[#CDCDCD] py-6 px-4">
+                                    <h1 class="text-lg font-bold"><a class="">{{ topico.nome }}</a></h1>                
+                                </div>
+                            {% endfor %}
                         </div> <!-- fim topicagem-->               
                 </div> <!-- fim div estranha ??? -->
                 {% endfor %}

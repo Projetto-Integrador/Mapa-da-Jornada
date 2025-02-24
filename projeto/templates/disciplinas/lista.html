@@ -27,8 +27,9 @@
                     <td>{{ disciplina.nome }}</td>
                     <td>{{ disciplina.descricao }}</td>
                     <td>
-                        <a href="{% url 'projeto:editar_disciplina' pk=disciplina.pk %}">Editar</a> | 
-                        <a href="{% url 'projeto:excluir_disciplina' pk=disciplina.pk %}">Excluir</a>
+                        <a href="{% url 'projeto:editar_disciplina' id_disciplina=disciplina.id %}">Editar Disciplina</a>
+
+                        {% comment %} <a href="{% url 'editar_disciplina' id_disciplina=disciplina.id %}">Excluir</a> {% endcomment %}
                     </td>
                 </tr>
             {% endfor %}
