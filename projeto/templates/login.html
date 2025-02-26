@@ -60,7 +60,7 @@
               </div>
               <div class="w-full lg:w-1/2 px-4">
                 <div class="px-6 lg:px-20 py-12 lg:py-24 bg-gray-600 rounded-lg">
-                  <form action="{% url 'projeto:minhasdisciplinas' %}" method="post">
+                  <form action="{% url 'minhasdisciplinas' %}" method="post">
                     {% csrf_token %}
                     <h3 class="mb-10 text-2xl text-white font-bold font-heading">Faça login</h3>
                     <div class="flex items-center pl-6 mb-3 bg-white rounded-full">
@@ -92,9 +92,9 @@
                         <input class="w-full pl-4 pr-6 py-4 font-bold placeholder-gray-400 rounded-r-full focus:outline-none" type="password" placeholder="Senha">
                       </div>
                     <div class="inline-flex mb-10">
-                      <p class="-mt-2 text-sm text-gray-200">Não possui conta? <a class="text-green-400" href="{% url 'projeto:registre' %}">Registre-se</a></p>
+                      <p class="-mt-2 text-sm text-gray-200">Não possui conta? <a class="text-green-400" href="{% url 'registre' %}">Registre-se</a></p>
                     </div>
-                    <button class="py-4 w-full bg-green-600 hover:bg-green-00 text-white font-bold rounded-full transition duration-200"><a href="{% url 'projeto:minhasdisciplinas' %}">Fazer login </a></button>
+                    <button class="py-4 w-full bg-green-600 hover:bg-green-00 text-white font-bold rounded-full transition duration-200"><a href="{% url 'minhasdisciplinas' %}">Fazer login </a></button>
                   </form>
                 </div>
               </div>

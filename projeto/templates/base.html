@@ -28,6 +28,10 @@
     
     <header class="flex items-center px-[48px] w-full h-[80px] bg-[#DBD4D4]">
         <h1 class="text-xl underline"><a href=""> Surpresa! </a></h1>
+        {% comment %} 
+        ATIVAR COM AUTORIZAÇÃO DE ADMIN QUANDO LOGADO
+        <h1 class="ml-4 text-xl underline"><a href="{% url 'lista_disciplinas' %}"> Disciplinas </a></h1>
+        {% endcomment %}
         <div class="ml-auto flex items-center">
             <button class="bg-green-500 rounded-full text-black font-medium px-6 py-2 border-0 text-xl items-center">
                 <a href="{% url 'login' %}"> Área do aluno </a>
