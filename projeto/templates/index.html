@@ -1,85 +1,58 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-
 <main class="w-auto h-[600px] flex flex-col items-center justify-center bg-white rounded shadow p-6">
     <div class="text-center">
         <button class="max-w-[800px] mx-auto bg-green-300 rounded-full text-black font-medium px-12 py-2 border-0 text-lg mb-10 items-center">
-            <a href="https://amor.com"> 💚 APROVEITE A JORNADA  </a>
+            <a href="https://amor.com"> 💚 APROVEITE A JORNADA </a>
         </button>
         <h1 class="text-6xl font-sora font-bold mb-4">Descubra o que é possível com <br/> o extenso mundo da <br/> criação.</h1>
         <p class="text-gray-600 text-lg max-w-[800px] mx-auto p-4">Nós criamos o Mapa da Jornada para ajudar na sua jornada de aprendizado. Um mapeamento das principais demandas exigidas pelo mercado, com sugestões, evidências e opiniões.</p>
     </div>
 </main>
-        <div class="w-auto h-full bg-black/10 rounded shadow px-64 py-16 flex flex-col">
+<div class="w-auto h-full bg-black/10 rounded shadow px-64 py-16 flex flex-col">
+    <button class="max-w-[800px] mx-auto bg-green-300 rounded-full text-black font-medium px-12 py-2 border-0 text-lg mb-10 items-center">
+        <a href=""> 💚 PANORAMA GERAL </a>
+    </button>
+    
+    <h1 class="text-6xl font-bold"> Informática para Internet </h1>
+    <div class="desc flex my-4 w-full"> 
+        <h3 class="mr-4"><strong> Carga horária: </strong> <br /> 3995h </h3>
+        <h3 class="mr-4"><strong> Modalidade: </strong> <br /> Técnico Integrado </h3>
+        <h3 class="mr-4"><strong> Duração: </strong> <br /> Quatro anos </h3>
+        <h3 class="mr-4"><strong> Tipo de ensino: </strong> <br /> Presencial </h3>
+        <h3 class="mr-4"><strong> Oferta em: </strong> <br /> 
+            <a class="underline" href="https://site.com">Natal-Central</a> | 
+            <a class="underline" href="https://site.com">Natal-Zona Norte</a> | 
+            <a class="underline" href="https://natal.com">São Paulo do Potengi</a>
+        </h3>
+    </div>
+    <div class="border-t-2 border-black my-2"></div>
 
-            <button class="max-w-[800px] mx-auto bg-green-300 rounded-full text-black font-medium px-12 py-2 border-0 text-lg mb-10 items-center">
-                <a href=""> 💚 PANORAMA GERAL </a>
-            </button>
-            
-            <h1 class="text-6xl font-bold"> Informática para Internet </h1>
-            <div class="desc flex my-4 w-full"> 
-                <h3 class="mr-4"><strong> Carga horária: </strong> <br /> 3995h </h3>
-                <h3 class="mr-4"><strong> Modalidade: </strong> <br /> Técnico Integrado </h3>
-                <h3 class="mr-4"><strong> Duração: </strong> <br /> Quatro anos </h3>
-                <h3 class="mr-4"><strong> Tipo de ensino: </strong> <br /> Presencial </h3>
-                <h3 class="mr-4"><strong> Oferta em: </strong> <br /> <a class="underline" href="https://site.com"> Natal-Central </a> | <a class="underline" href="https://site.com">Natal-Zona Norte</a> | <a class="underline" href="https://natal.com">São Paulo do Potengi</a></h3>
-            </div> <!-- descrição do curso de info -->
-            <div class="border-t-2 border-black my-2"></div>
+    <div class="grid w-full gap-4 h-full">
 
-            <!-- <div class="grid grid-cols-[300px_1fr] gap-4 h-full">
-                <aside class="h-full bg-green-300 rounded-2xl mt-2 text-white">
-                    <div class="m-4 text-black">
-                        <h2 class="text-3xl font-bold text-black">Período letivo</h2>
-                        <p class="mt-2 text-xl">Em qual ano letivo você se encontra?</p>
-                        <ul class="mt-6 gap-4">
-                            <li><a href="#" class="text-black text-lg border-b-2 border-black pb-0.2">Primeiro ano</a></li>
-                            <li><a href="#" class="text-black text-lg border-b-2 border-black pb-0.2">Segundo ano</a></li>
-                            <li><a href="#" class="text-black text-lg border-b-2 border-black pb-0.2">Terceiro ano</a></li>
-                            <li><a href="#" class="text-black text-lg border-b-2 border-black pb-0.2">Quarto ano</a></li>
-                        </ul>
-                    </div>
-                </aside> -->
-
-            <div class="grid grid-cols-[300px_1fr] gap-4 h-full">
-                <aside class="h-full bg-green-300 rounded-2xl mt-2 text-white">
-                    <div class="m-4 text-black">
-                        <h2 class="text-3xl font-bold text-black">Período letivo</h2>
-                        <p class="mt-2 text-xl">Em qual ano letivo você se encontra?</p>
-                        <ul class="mt-6 gap-4">
-                            <li><a class="text-black text-lg border-b-2 border-black pb-0.2">Primeiro ano</a></li>
-                            <li><a class="text-black text-lg border-b-2 border-black pb-0.2">Segundo ano</a></li>
-                            <li><a class="text-black text-lg border-b-2 border-black pb-0.2">Terceiro ano</a></li>
-                            <li><a class="text-black text-lg border-b-2 border-black pb-0.2">Quarto ano</a></li>
-                        </ul>
-                    </div>
-                </aside>
-
-                <div class="grid content-start gap-4 mt-2 rounded-2xl">
-                    <div id="materias" class="bg-green-300 rounded-2xl relative flex flex-col">
-                        {% for disciplina in disciplinas %}
-                        <div class="bg-green-300 h-56 rounded-2xl p-4 relative flex flex-col">
-                            <div class="flex-1">
-                                <h2 class="text-xl font-bold">{{ disciplina.nome }}</h2>
-                                <h3 class="py-2">Carga horária: 300h</h3> <!-- Ajuste isso se tiver um campo real -->
-                            </div>
-                            <button class="bg-black text-white rounded-lg w-[30%] px-2 py-4 hover:bg-black mt-auto">
-                                <a href="{% url 'lista_modulos' disciplina.id %}">Ver Mais</a>
-                            </button>
-                            <img src="https://fastly.picsum.photos/id/479/200/200.jpg?hmac=VH6eGzugyQKHVUXvN1fcPAfAN5PbTkE8Tf22vb6JuG8" alt="Imagem da disciplina" class="absolute top-0 right-0 h-full w-1/3 object-cover">
+        <div class="grid content-start gap-4 mt-2 rounded-2xl">
+            <div id="materias" class="bg-green-300 rounded-2xl relative flex flex-col">
+                {% for disciplina in disciplinas %}
+                    <div class="bg-green-300 h-56 rounded-2xl p-4 relative flex flex-col">
+                        <div class="flex-1">
+                            <h2 class="text-xl font-bold">{{ disciplina.nome }}</h2>
+                            <h3 class="py-2">Carga horária: 300h</h3>
                         </div>
-                    {% empty %}
-                        <div class="bg-green-300 h-56 rounded-2xl p-4 relative flex flex-col">
-                            <div class="flex-1">
-                                <h2 class="text-xl font-bold text-gray-600">Nenhuma disciplina cadastrada</h2>
-                            </div>
-                        </div>
-                    {% endfor %}
+                        <button class="bg-black text-white rounded-lg w-[30%] px-2 py-4 hover:bg-black mt-auto">
+                            <a href="">Inscrever-se</a>
+                        </button>
+                        <img src="https://fastly.picsum.photos/id/479/200/200.jpg?hmac=VH6eGzugyQKHVUXvN1fcPAfAN5PbTkE8Tf22vb6JuG8" alt="Imagem da disciplina" class="absolute top-0 right-0 h-full w-1/3 object-cover">
                     </div>
-                </div>
+                {% empty %}
+                    <div class="bg-green-300 h-56 rounded-2xl p-4 relative flex flex-col">
+                        <div class="flex-1">
+                            <h2 class="text-xl font-bold text-gray-600">Nenhuma disciplina cadastrada</h2>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
-
         </div>
-
+    </div>
+</div>
 {% endblock content %}

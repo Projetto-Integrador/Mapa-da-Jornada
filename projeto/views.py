@@ -3,9 +3,10 @@ from django.forms import inlineformset_factory, modelformset_factory
 from .models import Disciplina, Curso, Modulo, Topico
 from .forms import DisciplinaForm, ModuloForm, TopicoForm  # Certifique-se de que estão em forms.py
 
-# Páginas estáticas
-def index(request):    
-    return render(request, "index.html") 
+def index(request):
+    curso = Curso.objects.get(nome="Informática para Internet")
+    disciplinas = curso.disciplinas.all()
+    return render(request, 'index.html', {'disciplinas': disciplinas})
 
 def login(request):
     return render(request, 'login.html')
