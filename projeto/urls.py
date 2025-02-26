@@ -1,10 +1,10 @@
-from django.urls import path
+from django.urls import path, include
+from projeto import views # Para index e outras views
 from . import views
 
 urlpatterns = [
     # Páginas estáticas
     path('', views.index, name='index'),
-    path('login/', views.login, name='login'),
     path('registre/', views.registre, name='registre'),
     path('fundamento/', views.fundamento, name='fundamento'),
     path('minhasdisciplinas/', views.minhasdisciplinas, name='minhasdisciplinas'),
@@ -36,4 +36,8 @@ urlpatterns = [
     path('<int:disciplina_id>/modulo/<int:modulo_id>/topico/<int:topico_id>/editar/', views.editar_topico, name='editar_topico'),
     path('<int:disciplina_id>/modulo/<int:modulo_id>/topico/<int:topico_id>/excluir/', views.excluir_topico, name='excluir_topico'),
     path('<int:disciplina_id>/modulo/<int:modulo_id>/topico/<int:topico_id>/', views.detalhe_topico, name='detalhe_topico'),
+
+    # Incluir URL's de contas    
+    path('accounts/', include('contas.urls')),  # Inclui URLs de contas    
 ]
+

@@ -17,6 +17,60 @@ def registre(request):
 def fundamento(request):
     return render(request, 'fundamento.html')
 
+# projeto/views.py
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Inscricao, Disciplina, Curso
+from django.contrib import messages
+
+def index(request):
+    curso, created = Curso.objects.get_or_create(nome="Informática para Internet")
+    disciplinas = curso.disciplinas.all()
+    return render(request, 'index.html', {'disciplinas': disciplinas})
+
+@login_required
+def minhasdisciplinas(request):
+    usuario = request.user
+    inscricoes = Inscricao.objects.filter(usuario=usuario)
+    return render(request, 'minhasdisciplinas.html', {'inscricoes': inscricoes})
+
+@login_required
+def inscrever(request, disciplina_id):
+    disciplina = get_object_or_404(Disciplina, id=disciplina_id)
+    usuario = request.user
+    inscricao, created = Inscricao.objects.get_or_create(usuario=usuario, disciplina=disciplina)
+    if created:
+        messages.success(request, f"Inscrição em {disciplina.nome} realizada com sucesso!")
+    else:
+        messages.info(request, f"Você já está inscrito em {disciplina.nome}.")
+    return redirect('minhasdisciplinas')
+
+@login_required
+def cancelar_inscrever(request, inscricao_id):
+    if request.method == 'POST':
+        inscricao = get_object_or_404(Inscricao, id=inscricao_id, usuario=request.user)
+        disciplina_nome = inscricao.disciplina.nome
+        inscricao.delete()
+        messages.success(request, f"Inscrição em {disciplina_nome} cancelada com sucesso!")
+    return redirect('minhasdisciplinas')
+
+@login_required
+def paginadisciplina(request, id_disciplina=None):
+    if id_disciplina:
+        disciplina = get_object_or_404(Disciplina, id=id_disciplina)
+        return render(request, 'disciplinas/paginadisciplina.html', {'disciplina': disciplina})
+    else:
+        return render(request, 'disciplinas/geral.html')
+
+@login_required
+def lista_disciplinas(request):
+    if not request.user.is_staff:
+        messages.error(request, "Acesso negado. Apenas administradores podem ver esta página.")
+        return redirect('index')
+    curso = Curso.objects.get(nome="Informática para Internet")
+    disciplinas = curso.disciplinas.all()
+    return render(request, 'disciplinas/lista_disciplinas.html', {'disciplinas': disciplinas})
+
 # Visualização de disciplina (usuário)
 def paginadisciplina(request, id_disciplina=None):
     if id_disciplina:
@@ -27,6 +81,7 @@ def paginadisciplina(request, id_disciplina=None):
     else:
         disciplinas = Disciplina.objects.all()
         return render(request, 'disciplinas/geral.html', {'disciplinas': disciplinas})
+
     
 def inscrever(request, disciplina_id):
     disciplina = get_object_or_404(Disciplina, id=disciplina_id)

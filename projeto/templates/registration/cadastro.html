@@ -1,0 +1,14 @@
+{% extends 'registration/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="mt-8">
+    <h1 class="text-3xl font-bold font-sora mb-6">Cadastro</h1>
+    <form method="post" enctype="multipart/form-data" class="max-w-lg mx-auto">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="bg-green-500 text-black font-medium px-6 py-2 rounded-full border-0 text-xl mt-4 w-full">Cadastrar</button>
+    </form>
+    <p class="mt-4 text-center">Já tem conta? <a href="{% url 'login' %}" class="text-blue-600 underline">Faça login</a></p>
+</div>
+{% endblock %}

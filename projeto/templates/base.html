@@ -1,49 +1,61 @@
+<!-- templates/base.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %} Mapa da Jornada {% endblock %}</title>
+    <title>{% block title %}Mapa da Jornada{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://unpkg.com/@material-tailwind/html@latest/styles/material-tailwind.css"/>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap" rel="stylesheet">
     <style>
-        /* Adicionando a fonte ao TailwindCSS */
         @import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
         .font-sora {
-            font-family: 'Sora', sans-serif; /* Usando a fonte externa */
+            font-family: 'Sora', sans-serif;
         }
-        .cor{
+        .cor {
             background-color: #67B264;
         }
     </style>
-    </style>
 </head>
 <body>
-    
     {% block header %}
-    
     <header class="flex items-center px-[48px] w-full h-[80px] bg-[#DBD4D4]">
-        <h1 class="text-xl underline"><a href=""> Surpresa! </a></h1>
-        {% comment %} 
-        ATIVAR COM AUTORIZAÇÃO DE ADMIN QUANDO LOGADO
-        <h1 class="ml-4 text-xl underline"><a href="{% url 'lista_disciplinas' %}"> Disciplinas </a></h1>
-        {% endcomment %}
+        <h1 class="text-xl underline"><a href="{% url 'index' %}">Surpresa!</a></h1>
+        {% if user.is_authenticated and user.is_staff %}
+            <h1 class="ml-4 text-xl underline"><a href="{% url 'lista_disciplinas' %}">Disciplinas</a></h1>
+        {% endif %}
         <div class="ml-auto flex items-center">
-            <button class="bg-green-500 rounded-full text-black font-medium px-6 py-2 border-0 text-xl items-center">
-                <a href="{% url 'login' %}"> Área do aluno </a>
-            </button>
+            {% if user.is_authenticated %}
+                <button class="bg-green-500 rounded-full text-black font-medium px-6 py-2 border-0 text-xl items-center">
+                    <a href="{% url 'minhasdisciplinas' %}">Área do Aluno</a>
+                </button>
+                
+                <button class="bg-green-500 rounded-full text-black font-medium px-6 py-2 border-0 text-xl items-center">
+                    <a href="{% url 'perfil' %}">Perfil</a>
+                </button>
+                <button class="bg-red-500 rounded-full text-black font-medium px-6 py-2 border-0 text-xl items-center ml-4">
+                    <a href="{% url 'logout' %}">Sair</a>
+                </button>
+            {% else %}
+                <button class="bg-green-500 rounded-full text-black font-medium px-6 py-2 border-0 text-xl items-center">
+                    <a href="{% url 'login' %}">Área do Aluno</a>
+                </button>
+            {% endif %}
         </div>
     </header>
-
-    {% endblock header %} 
-    <div class="mx-auto">
+    {% endblock header %}
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="mt-4 p-4 {% if message.tags == 'success' %}bg-green-100 text-green-800{% elif message.tags == 'error' %}bg-red-100 text-red-800{% else %}bg-gray-100 text-gray-800{% endif %} rounded-lg">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
         {% block content %}{% endblock %}
     </div>
-
-
 </body>
 </html>

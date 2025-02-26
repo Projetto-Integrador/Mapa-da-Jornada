@@ -1,0 +1,9 @@
+<!-- templates/registration/logged_out.html -->
+{% extends 'registration/base.html' %}
+
+{% block content %}
+<div class="mt-8 text-center">
+    <h1 class="text-3xl font-bold font-sora mb-6">Você saiu</h1>
+    <p><a href="{% url 'login' %}" class="text-blue-600 underline">Fazer login novamente</a></p>
+</div>
+{% endblock %}

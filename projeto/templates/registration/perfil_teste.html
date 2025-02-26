@@ -1,0 +1,25 @@
+<!-- templates/registration/perfil_teste.html -->
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="mt-8">
+    <h1 class="text-3xl font-bold font-sora mb-6">Perfil Teste</h1>
+    <form method="post" enctype="multipart/form-data" class="max-w-lg mx-auto">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="mb-4">
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.errors %}
+                    <span class="text-red-600">{{ field.errors }}</span>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit" class="bg-green-500 text-black font-medium px-6 py-2 rounded-full border-0 text-xl mt-4 w-full">Salvar Alterações</button>
+    </form>
+    <div class="mt-4 text-center">
+        <a href="{% url 'password_change' %}" class="text-blue-600 underline">Mudar Senha</a>
+    </div>
+</div>
+{% endblock %}

@@ -32,6 +32,9 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'projeto',
+    'contas',
+    'crispy_forms',  # Para estilizar formulários
+    'crispy_bootstrap5',  # Opcional, para Bootstrap 5
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,6 +42,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+AUTH_USER_MODEL = 'contas.Usuario'
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/accounts/perfil/'  # Adicione isso
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -55,7 +68,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],  # Pasta global de templates
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
