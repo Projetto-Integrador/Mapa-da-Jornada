@@ -20,6 +20,13 @@ class Modulo(models.Model):
     def __str__(self):
         return self.nome
 
+class Inscricao(models.Model):
+    usuario = models.CharField(max_length=100)  # Identificador fictício por agora
+    disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE, related_name='inscricoes')
+
+    def __str__(self):
+        return f"{self.usuario} - {self.disciplina.nome}"
+
 class Topico(models.Model):
     modulo = models.ForeignKey(Modulo, on_delete=models.CASCADE, related_name='topicos')
     nome = models.CharField(max_length=100)

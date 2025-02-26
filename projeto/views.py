@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.forms import inlineformset_factory, modelformset_factory
-from .models import Disciplina, Curso, Modulo, Topico
+from .models import Disciplina, Curso, Modulo, Topico, Inscricao
 from .forms import DisciplinaForm, ModuloForm, TopicoForm  # Certifique-se de que estão em forms.py
 
 def index(request):
@@ -16,9 +16,6 @@ def registre(request):
 
 def fundamento(request):
     return render(request, 'fundamento.html')
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import Disciplina, Curso, Modulo, Topico
-from .forms import DisciplinaForm, ModuloForm, TopicoForm
 
 # Visualização de disciplina (usuário)
 def paginadisciplina(request, id_disciplina=None):
@@ -30,6 +27,35 @@ def paginadisciplina(request, id_disciplina=None):
     else:
         disciplinas = Disciplina.objects.all()
         return render(request, 'disciplinas/geral.html', {'disciplinas': disciplinas})
+    
+def inscrever(request, disciplina_id):
+    disciplina = get_object_or_404(Disciplina, id=disciplina_id)
+    usuario = "usuario_teste"
+    print(f"Tentando inscrever {usuario} na disciplina {disciplina.nome} (ID: {disciplina_id})")
+    # Cria uma nova inscrição se não existir
+    if not Inscricao.objects.filter(usuario=usuario, disciplina=disciplina).exists():
+        inscricao = Inscricao(usuario=usuario, disciplina=disciplina)
+        inscricao.save()
+        print(f"Inscrição criada: {inscricao}")
+    else:
+        print(f"Já inscrito em {disciplina.nome}")
+    print(f"Total de inscrições para {usuario}: {Inscricao.objects.filter(usuario=usuario).count()}")
+    return redirect('minhasdisciplinas')
+
+def cancelar_inscrever(request, inscricao_id):
+    if request.method == 'POST':
+        inscricao = get_object_or_404(Inscricao, id=inscricao_id)
+        inscricao.delete()
+        return redirect('minhasdisciplinas')
+    else:
+        return redirect('minhasdisciplinas')
+
+def minhasdisciplinas(request):
+    usuario = "usuario_teste"
+    inscricoes = Inscricao.objects.filter(usuario=usuario)
+    print(f"Inscrições encontradas: {list(inscricoes)}")
+    print(f"Disciplinas inscritas para {usuario}: {[i.disciplina.nome for i in inscricoes]}")
+    return render(request, 'minhasdisciplinas.html', {'inscricoes': inscricoes})
 
 # Gerenciamento de disciplinas (aberto a todos por agora)
 def lista_disciplinas(request):
