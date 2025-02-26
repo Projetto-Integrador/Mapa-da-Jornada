@@ -48,76 +48,38 @@
                         <h2 class="text-3xl font-bold text-black">Período letivo</h2>
                         <p class="mt-2 text-xl">Em qual ano letivo você se encontra?</p>
                         <ul class="mt-6 gap-4">
-                            <li><a class="text-black text-lg border-b-2 border-black pb-0.2" onclick="mostrarMaterias('primeiro')">Primeiro ano</a></li>
-                            <li><a class="text-black text-lg border-b-2 border-black pb-0.2" onclick="mostrarMaterias('segundo')">Segundo ano</a></li>
-                            <li><a class="text-black text-lg border-b-2 border-black pb-0.2" onclick="mostrarMaterias('terceiro')">Terceiro ano</a></li>
-                            <li><a class="text-black text-lg border-b-2 border-black pb-0.2" onclick="mostrarMaterias('quarto')">Quarto ano</a></li>
+                            <li><a class="text-black text-lg border-b-2 border-black pb-0.2">Primeiro ano</a></li>
+                            <li><a class="text-black text-lg border-b-2 border-black pb-0.2">Segundo ano</a></li>
+                            <li><a class="text-black text-lg border-b-2 border-black pb-0.2">Terceiro ano</a></li>
+                            <li><a class="text-black text-lg border-b-2 border-black pb-0.2">Quarto ano</a></li>
                         </ul>
                     </div>
                 </aside>
 
                 <div class="grid content-start gap-4 mt-2 rounded-2xl">
-                    <div id="materias" class="bg-green-300 h-56 rounded-2xl p-4 relative overflow-hidden flex flex-col">
-                        <h2 class="text-xl font-bold">Primeiro Período</h2>
+                    <div id="materias" class="bg-green-300 rounded-2xl relative flex flex-col">
+                        {% for disciplina in disciplinas %}
+                        <div class="bg-green-300 h-56 rounded-2xl p-4 relative flex flex-col">
+                            <div class="flex-1">
+                                <h2 class="text-xl font-bold">{{ disciplina.nome }}</h2>
+                                <h3 class="py-2">Carga horária: 300h</h3> <!-- Ajuste isso se tiver um campo real -->
+                            </div>
+                            <button class="bg-black text-white rounded-lg w-[30%] px-2 py-4 hover:bg-black mt-auto">
+                                <a href="{% url 'lista_modulos' disciplina.id %}">Ver Mais</a>
+                            </button>
+                            <img src="https://fastly.picsum.photos/id/479/200/200.jpg?hmac=VH6eGzugyQKHVUXvN1fcPAfAN5PbTkE8Tf22vb6JuG8" alt="Imagem da disciplina" class="absolute top-0 right-0 h-full w-1/3 object-cover">
+                        </div>
+                    {% empty %}
+                        <div class="bg-green-300 h-56 rounded-2xl p-4 relative flex flex-col">
+                            <div class="flex-1">
+                                <h2 class="text-xl font-bold text-gray-600">Nenhuma disciplina cadastrada</h2>
+                            </div>
+                        </div>
+                    {% endfor %}
                     </div>
                 </div>
             </div>
 
         </div>
-
-<script>
-    const materiasPorAno = {
-        primeiro: [
-            { nome: 'Fundamentos de Lógica e Algoritmos', cargaHoraria: '300h', url: '{% url "projeto:fundamento" %}' },
-            { nome: 'Princípios de WebDesign', cargaHoraria: '300h', url: '{% url "projeto:fundamento" %}' },
-            { nome: 'História', cargaHoraria: '300h', url: '{% url "projeto:fundamento" %}' },
-            { nome: 'Geografia', cargaHoraria: '300h', url: '{% url "projeto:fundamento" %}' }
-        ],
-        segundo: [
-            { nome: 'Matemática II', cargaHoraria: '300h', url: '{% url "projeto:fundamento" %}' },
-            { nome: 'Português II', cargaHoraria: '300h', url: '{% url "projeto:fundamento" %}' },
-            { nome: 'Biologia', cargaHoraria: '300h', url: '{% url "projeto:fundamento" %}' },
-            { nome: 'Física', cargaHoraria: '300h', url: '{% url "projeto:fundamento" %}' }
-        ],
-        terceiro: [
-            { nome: 'Matemática III', cargaHoraria: '300h', url: '{% url "projeto:fundamento" %}' },
-            { nome: 'Português III', cargaHoraria: '300h', url: '{% url "projeto:fundamento" %}' },
-            { nome: 'Química', cargaHoraria: '300h', url: '{% url "projeto:fundamento" %}' },
-            { nome: 'Educação Física', cargaHoraria: '300h', url: '{% url "projeto:fundamento" %}' }
-        ],
-        quarto: [
-            { nome: 'Matemática IV', cargaHoraria: '300h', url: '{% url "projeto:fundamento" %}' },
-            { nome: 'Português IV', cargaHoraria: '300h', url: '{% url "projeto:fundamento" %}' },
-            { nome: 'Literatura', cargaHoraria: '300h', url: '{% url "projeto:fundamento" %}' },
-            { nome: 'Arte', cargaHoraria: '300h', url: '{% url "projeto:fundamento" %}' }
-        ]
-    };
-
-    function mostrarMaterias(anoSelecionado) {
-        const materiasDiv = document.getElementById('materias');
-        materiasDiv.innerHTML = ''; // Limpa as matérias anteriores
-
-        if (anoSelecionado) {
-            const materias = materiasPorAno[anoSelecionado];
-            materias.forEach(materia => {
-                const div = document.createElement('div');
-                div.className = 'bg-green-300 h-56 rounded-2xl p-4 relative flex flex-col mb-4';
-                div.innerHTML = `
-                    <div class="flex-1">
-                        <h2 class="text-xl font-bold">${materia.nome}</h2>
-                        <h3 class="py-2">Carga horária: ${materia.cargaHoraria}</h3>
-                    </div>
-                    <button class="bg-black text-bold text-white rounded-lg w-[30%] px-2 py-4 hover:bg-black mt-auto">
-                        <a href="${materia.url}">Ver mais</a>
-                    </button>
-                    <img src="https://fastly.picsum.photos/id/479/200/200.jpg?hmac=VH6eGzugyQKHVUXvN1fcPAfAN5PbTkE8Tf22vb6JuG8" alt="Descrição da imagem" class="z-0 absolute top-0 right-0 h-full w-1/3 object-cover">
-                `;
-                materiasDiv.appendChild(div);
-            });
-        }
-    }
-
-    
-</script>
 
 {% endblock content %}

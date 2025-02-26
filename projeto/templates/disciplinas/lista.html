@@ -13,7 +13,7 @@
     <!-- projeto/templates/disciplinas/lista.html -->
     <h1>Disciplinas</h1>
     <table>
-        <a href="{% url 'projeto:criar_disciplina' %}">Criar Nova Disciplina</a>
+        <a href="{% url 'criar_disciplina' %}">Criar Nova Disciplina</a>
         <thead>
             <tr>
                 <th>Nome</th>
@@ -27,7 +27,7 @@
                     <td>{{ disciplina.nome }}</td>
                     <td>{{ disciplina.descricao }}</td>
                     <td>
-                        <a href="{% url 'projeto:editar_disciplina' id_disciplina=disciplina.id %}">Editar Disciplina</a>
+                        <a href="{% url 'editar_disciplina' disciplina_id=disciplina.id %}">Editar Disciplina</a>
 
                         {% comment %} <a href="{% url 'editar_disciplina' id_disciplina=disciplina.id %}">Excluir</a> {% endcomment %}
                     </td>

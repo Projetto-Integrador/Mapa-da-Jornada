@@ -3,12 +3,10 @@ from .models import Curso, Disciplina, Modulo, Topico
 
 admin.site.register(Curso)
 
-
-# Verifica se o modelo Modulo já está registrado
 if not admin.site.is_registered(Modulo):
     @admin.register(Modulo)
     class ModuloAdmin(admin.ModelAdmin):
-        list_display = ('nome', 'disciplina', 'ordem')  # Exibir o nome, disciplina associada e ordem do módulo
+        list_display = ('nome', 'disciplina')  # Exibir o nome, disciplina associada e ordem do módulo
         search_fields = ('nome', 'disciplina__nome')   # Permitir buscar por nome do módulo e nome da disciplina associada
         list_filter = ('disciplina',)                   # Filtrar módulos pela disciplina associada
 

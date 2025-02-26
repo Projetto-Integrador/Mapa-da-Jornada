@@ -1,0 +1,22 @@
+{% extends 'disciplinas/base.html' %}
+{% block title %}Tópicos - {{ modulo.nome }}{% endblock %}
+{% block content %}
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Tópicos do Módulo: {{ modulo.nome }}</h1>
+    <a href="{% url 'criar_topico' disciplina.id modulo.id %}" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition mb-4">Criar Novo Tópico</a>
+    <div class="bg-white shadow-md rounded-lg overflow-hidden">
+        <ul class="divide-y divide-gray-200">
+            {% for topico in topicos %}
+                <li class="p-4 flex justify-between items-center hover:bg-gray-50">
+                    <a href="{% url 'detalhe_topico' disciplina.id modulo.id topico.id %}" class="text-lg text-blue-600 hover:underline">{{ topico.nome }}</a>
+                    <div class="space-x-2">
+                        <a href="{% url 'editar_topico' disciplina.id modulo.id topico.id %}" class="text-green-600 hover:text-green-800">[Editar]</a>
+                        <a href="{% url 'excluir_topico' disciplina.id modulo.id topico.id %}" class="text-red-600 hover:text-red-800">[Excluir]</a>
+                    </div>
+                </li>
+            {% empty %}
+                <li class="p-4 text-gray-500">Nenhum tópico cadastrado.</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <a href="{% url 'lista_modulos' disciplina.id %}" class="inline-block mt-4 text-blue-600 hover:underline">Voltar para Módulos</a>
+{% endblock %}

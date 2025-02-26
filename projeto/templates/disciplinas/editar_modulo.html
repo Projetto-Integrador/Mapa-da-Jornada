@@ -1,0 +1,14 @@
+{% extends 'disciplinas/base.html' %}
+{% block title %}Editar Módulo{% endblock %}
+{% block content %}
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Editar Módulo: {{ modulo.nome }}</h1>
+    <form method="post" class="bg-white p-6 rounded-lg shadow-md">
+        {% csrf_token %}
+        <div class="mb-4">
+            <label for="id_nome" class="block text-gray-700 font-semibold mb-2">Nome</label>
+            {{ form.nome }}
+        </div>
+        <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">Salvar</button>
+    </form>
+    <a href="{% url 'lista_modulos' disciplina.id %}" class="inline-block mt-4 text-blue-600 hover:underline">Voltar</a>
+{% endblock %}

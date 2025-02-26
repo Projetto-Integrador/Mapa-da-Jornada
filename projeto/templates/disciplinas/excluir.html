@@ -1,9 +1,0 @@
-<!-- templates/disciplinas/excluir.html -->
-<h1>Excluir Disciplina</h1>
-<p>Tem certeza que deseja excluir a disciplina "{{ disciplina.nome }}"?</p>
-<form method="POST">
-    {% csrf_token %}
-    <button type="submit">Excluir</button>
-    <a href="{% url 'projeto:excluir_disciplina' pk=disciplina.pk %}">Excluir</a>
-</form>
-

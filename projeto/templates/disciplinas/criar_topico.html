@@ -1,0 +1,18 @@
+{% extends 'disciplinas/base.html' %}
+{% block title %}Criar Tópico{% endblock %}
+{% block content %}
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Criar Novo Tópico para {{ modulo.nome }}</h1>
+    <form method="post" class="bg-white p-6 rounded-lg shadow-md">
+        {% csrf_token %}
+        <div class="mb-4">
+            <label for="id_nome" class="block text-gray-700 font-semibold mb-2">Nome</label>
+            {{ form.nome }}
+        </div>
+        <div class="mb-4">
+            <label for="id_conteudo" class="block text-gray-700 font-semibold mb-2">Conteúdo</label>
+            {{ form.conteudo }}
+        </div>
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Salvar</button>
+    </form>
+    <a href="{% url 'lista_topicos' disciplina.id modulo.id %}" class="inline-block mt-4 text-blue-600 hover:underline">Voltar</a>
+{% endblock %}

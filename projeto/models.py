@@ -1,42 +1,29 @@
 from django.db import models
 
 class Curso(models.Model):
-    nome = models.CharField(
-        max_length=100, 
-        default="Informática para Internet", 
-        editable=False  # Impede que seja alterado no admin ou em formulários
-    )
-    descricao = models.TextField()
+    nome = models.CharField(max_length=100, default="Informática para Internet", editable=False)
 
     def __str__(self):
         return self.nome
-
 
 class Disciplina(models.Model):
     nome = models.CharField(max_length=100)
-    descricao = models.TextField() # Campo de texto
-    curso = models.ForeignKey('Curso', on_delete=models.CASCADE)  # Relacionamento com o Curso
-
+    curso = models.ForeignKey(Curso, on_delete=models.CASCADE, related_name='disciplinas')
 
     def __str__(self):
         return self.nome
 
-
 class Modulo(models.Model):
-    disciplina = models.ForeignKey(
-        Disciplina, 
-        on_delete=models.CASCADE
-    )
-    nome = models.CharField(max_length=255)
-    ordem = models.IntegerField()
+    nome = models.CharField(max_length=100)
+    disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE, related_name='modulos')
 
     def __str__(self):
-        return f"{self.nome} - Ordem {self.ordem} (Disciplina: {self.disciplina.nome})"
+        return self.nome
 
 class Topico(models.Model):
     modulo = models.ForeignKey(Modulo, on_delete=models.CASCADE, related_name='topicos')
-    nome = models.CharField(max_length=200)
-    descricao = models.TextField()  # Este é o campo 'descricao' que você está tentando usar
+    nome = models.CharField(max_length=100)
+    conteudo = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.nome

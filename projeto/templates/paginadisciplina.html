@@ -3,29 +3,23 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Página Disciplina </title>
+    <title>Página Disciplina - {{ disciplina.nome }}</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
-
     <main class="flex">
         <aside class="w-[25%] y-full">
             <div class="bg-[#404040] text-white py-8 px-4 rounded-tr-4xl">
-
-                <h1 class="text-3xl font-bold">Fundamentos de Lógica e Algoritmos</h1>
-                
+                <h1 class="text-3xl font-bold">{{ disciplina.nome }}</h1>
             </div>
-            <!-- Selecionar Módulo -->
             <div class="text-xl py-6 px-4 font-bold">
                 Selecione o módulo que deseja estudar:
             </div>
-
+            
             <div class="modulagem">
-                <!-- Módulo -->
-                {% for modulo in disciplina.modulo_set_all %}
-                <div class="bg-red-500 y-[150px] py-6 px-4">
+                {% for modulo in disciplina.modulos.all %}
+                <div class="w-full y-[150px]">
                         <div class="bg-[#858585] y-[150px] text-black py-6 px-4">
                             <h1 class="text-2xl font-bold">{{ modulo.nome }}</h1>                
                             <p class="text-base mt-4">(Contextualização histórica antes de mergulhar nos fundamentos técnicos)</p>               
@@ -33,59 +27,27 @@
                         </div> <!-- Fim Módulo -->
                         
                         <div class="topicagem text-white">
-                            {% for topico in modulo.topico_set.all %}
-                            <div class="topico bg-[#CDCDCD] py-6 px-4">
-                                <a href="{% url 'topico_detalhe' topico.id %}">
-                                    <h1 class="text-lg font-bold">{{ topico.nome }}</h1>
-                                </a>
-                            </div>
-                        {% endfor %}
+                            {% for topico in modulo.topicos.all %}
+                                <div class="topico bg-[#CDCDCD] py-6 px-4">
+                                    <h1 class="text-lg font-bold"><a class="">{{ topico.nome }}</a></h1>                
+                                </div>
+                            {% endfor %}
                         </div> <!-- fim topicagem-->               
                 </div> <!-- fim div estranha ??? -->
+                {% empty %}
+                    <p class="text-gray-500 p-4">Nenhum módulo cadastrado.</p>
                 {% endfor %}
-            </div> <!-- fim modulagem -->
-
-
+            </div> <!--modulagem-->
         </aside>
-
         <section class="py-12 px-12 w-[75%]">
-            <h2 class="text-4xl font-bold"> Olá, caro estudante. </h2>
-            <p class="text-2xl mt-2 w-[75%]"> A disciplina de <b>Fundamentos de Lógica e Algoritmos</b>, como visto em sua página, que você possui acesso clicando aqui, lhe fornecerá o essencial para o ofício de <b>Técnico em Informática para Internet.</b> </p>
-
-            <div class="infogeral mt-16">
-                <h2 class="text-3xl font-semibold">Informações gerais</h2>
-                <ul class="list-decimal list-inside py-4 flex w-full]">
-                    <div class="flex flex-col">
-                        <li class="text-xl font-medium">Objetivos Gerais 
-                            <p class="text-medium py-2 px-4 font-normal">Capacitar o estudante a compreender e aplicar os princípios básicos da lógica computacional e da construção de algoritmos, desenvolvendo habilidades essenciais para resolver problemas de forma estruturada e eficiente, além de prepará-lo para disciplinas avançadas de programação.</p>
-                        </li>
-                        <li class="text-xl font-medium py-12">Objetivo principal 
-                            <p class="text-medium py-2 px-4 font-normal">Ensinar o aluno a transformar problemas do mundo real em soluções algorítmicas, utilizando técnicas de raciocínio lógico, estruturas de controle (sequência, decisão e repetição) e representações como pseudocódigo e fluxogramas.</p>
-                        </li>
-                    </div> <!-- fim divisão primeira e segunda <Li> para a terceira, que é a próxima abaixo -->
-                    <li class="text-xl font-medium">Habilidades adquiridas 
-                        <p class="text-medium py-2 px-4 font-normal">Desenvolver algoritmos para resolver problemas simples (ex: cálculos matemáticos básicos, validação de dados).</p>
-                        <p class="text-medium py-2 px-4 font-normal">Compreender e aplicar os conceitos de variáveis, constantes, operadores e expressões.</p>
-                        <p class="text-medium py-2 px-4 font-normal">Utilizar estruturas de controle sequencial, condicional e de repetição.</p>
-                        <p class="text-medium py-2 px-4 font-normal">Desenvolver algoritmos para resolver problemas mais complexos, como cálculos de médias, validação de dados, cálculos de juros, entre outros.</p>
-                        <p class="text-medium py-2 px-4 font-normal">Compreender e aplicar os conceitos de vetores e matrizes.</p>
-                        <p class="text-medium py-2 px-4 font-normal">Desenvolver algoritmos para resolver problemas de busca e ordenação.</p>
-                        <p class="text-medium py-2 px-4 font-normal">Compreender e aplicar os conceitos de funções e procedimentos.</p>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="infopratica mt-16">
-                <div class="textos w-[50%]">
-                    <h2 class="text-3xl font-semibold">Prática</h2>                
-                    <p class="text-xl mt-4"> Deseja saber mais sobre <b>Carreiras e Profissões</b> de alguém com conhecimento em <b>Fundamentos de Lógica e Algoritmos</b>? </p>
-                    <a class="" href="https://neymar.com"><button class="px-24 py-6 bg-black mt-6 rounded-full text-white font-bold text-xl">ACESSAR</button></a>
-                </div>
-            </div>
-            
+            <h2 class="text-4xl font-bold">Olá, caro estudante.</h2>
+            <p class="text-2xl mt-2 w-[75%]">
+                A disciplina de <b>{{ disciplina.nome }}</b>, como visto em sua página, que você possui acesso 
+                <a href="{% url 'paginadisciplina' disciplina.id %}" class="text-blue-600 hover:underline">clicando aqui</a>,
+                lhe fornecerá o essencial para o ofício de <b>Técnico em Informática para Internet.</b>
+            </p>
+            <!-- Restante da section -->
         </section>
-
     </main>
-
 </body>
 </html>

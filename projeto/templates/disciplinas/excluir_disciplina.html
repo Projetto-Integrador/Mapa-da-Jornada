@@ -1,0 +1,13 @@
+{% extends 'disciplinas/base.html' %}
+{% block title %}Excluir Disciplina{% endblock %}
+{% block content %}
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Excluir Disciplina: {{ disciplina.nome }}</h1>
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <p class="text-gray-700 mb-4">Tem certeza que deseja excluir esta disciplina? Isso também excluirá todos os módulos e tópicos associados.</p>
+        <form method="post" class="flex space-x-4">
+            {% csrf_token %}
+            <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">Excluir</button>
+            <a href="{% url 'lista_disciplinas' %}" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition">Cancelar</a>
+        </form>
+    </div>
+{% endblock %}
