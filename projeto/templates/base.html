@@ -33,12 +33,17 @@
                     <a href="{% url 'minhasdisciplinas' %}">Área do Aluno</a>
                 </button>
                 
+
                 <button class="bg-green-500 rounded-full text-black font-medium px-6 py-2 border-0 text-xl items-center">
                     <a href="{% url 'perfil' %}">Perfil</a>
                 </button>
-                <button class="bg-red-500 rounded-full text-black font-medium px-6 py-2 border-0 text-xl items-center ml-4">
-                    <a href="{% url 'logout' %}">Sair</a>
-                </button>
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="bg-red-500 rounded-full text-black font-medium px-6 py-2 border-0 text-xl items-center ml-4">
+                        Sair
+                    </button>
+                </form>
+ 
             {% else %}
                 <button class="bg-green-500 rounded-full text-black font-medium px-6 py-2 border-0 text-xl items-center">
                     <a href="{% url 'login' %}">Área do Aluno</a>
