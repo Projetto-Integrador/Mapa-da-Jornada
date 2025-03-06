@@ -10,6 +10,8 @@
 
     <section class="cursosinscritos items-center mt-12">
 
+        
+
             <div class="textoselecao flex justify-between">
                 <h1 class="text-2xl font-bold font-sora"> Disciplinas inscritos </h1>
                 <div class="setas">
@@ -50,6 +52,16 @@
 
         </div><!--grid-->
         <a href="{% url 'index' %}" class="inline-block mt-4 text-blue-600 hover:underline">Voltar para Tela Inicial</a>
+        {% if messages %}
+        <div>
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endfor %}
+        </div>
+        {% endif %}
 
 
 

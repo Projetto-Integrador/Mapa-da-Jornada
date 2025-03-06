@@ -48,11 +48,12 @@ def inscrever(request, disciplina_id):
 @login_required
 def cancelar_inscrever(request, inscricao_id):
     if request.method == 'POST':
+        # Verifica se a inscrição existe e pertence ao usuário logado
         inscricao = get_object_or_404(Inscricao, id=inscricao_id, usuario=request.user)
-        disciplina_nome = inscricao.disciplina.nome
-        inscricao.delete()
+        disciplina_nome = inscricao.disciplina.nome  # Obtém o nome da disciplina para a mensagem
+        inscricao.delete()  # Cancela a inscrição
         messages.success(request, f"Inscrição em {disciplina_nome} cancelada com sucesso!")
-    return redirect('minhasdisciplinas')
+    return redirect('minhasdisciplinas')  # Redireciona para a página de disciplinas inscritas
 
 @login_required
 def paginadisciplina(request, id_disciplina=None):
