@@ -1,10 +1,15 @@
+# projeto/views.py
 from django.shortcuts import render, get_object_or_404, redirect
-from django.forms import inlineformset_factory, modelformset_factory
+from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
+from django.http import JsonResponse
+from django.contrib import messages
 from .models import Disciplina, Curso, Modulo, Topico, Inscricao
 from .forms import DisciplinaForm, ModuloForm, TopicoForm  # Certifique-se de que estão em forms.py
 
 def index(request):
-    curso = Curso.objects.get(nome="Informática para Internet")
+    curso, created = Curso.objects.get_or_create(nome="Informática para Internet")
+    print(f"Index - Usuário logado: {request.user if request.user.is_authenticated else 'Anônimo'}")
     disciplinas = curso.disciplinas.all()
     return render(request, 'index.html', {'disciplinas': disciplinas})
 
@@ -17,104 +22,60 @@ def registre(request):
 def fundamento(request):
     return render(request, 'fundamento.html')
 
-# projeto/views.py
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Inscricao, Disciplina, Curso
-from django.contrib import messages
-
-def index(request):
-    curso, created = Curso.objects.get_or_create(nome="Informática para Internet")
-    disciplinas = curso.disciplinas.all()
-    return render(request, 'index.html', {'disciplinas': disciplinas})
-
 @login_required
 def minhasdisciplinas(request):
     usuario = request.user
-    inscricoes = Inscricao.objects.filter(usuario=usuario)
-    return render(request, 'minhasdisciplinas.html', {'inscricoes': inscricoes})
+    inscricoes = Inscricao.objects.filter(usuario=usuario).order_by('disciplina__nome')
+    print(f"Minhas Disciplinas - Usuário logado: {usuario}, Inscrições: {[i.disciplina.nome for i in inscricoes]}")
+    paginator = Paginator(inscricoes, 3)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'minhasdisciplinas.html', {'page_obj': page_obj})
 
 @login_required
 def inscrever(request, disciplina_id):
-    disciplina = get_object_or_404(Disciplina, id=disciplina_id)
-    usuario = request.user
-    inscricao, created = Inscricao.objects.get_or_create(usuario=usuario, disciplina=disciplina)
-    if created:
-        messages.success(request, f"Inscrição em {disciplina.nome} realizada com sucesso!")
-    else:
-        messages.info(request, f"Você já está inscrito em {disciplina.nome}.")
-    return redirect('minhasdisciplinas')
+    if request.method == 'POST':
+        disciplina = get_object_or_404(Disciplina, id=disciplina_id)
+        inscricao, created = Inscricao.objects.get_or_create(usuario=request.user, disciplina=disciplina)
+        print(f"Inscrição - Usuário logado: {request.user}, Disciplina: {disciplina.nome}, Criada: {created}")
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            if created:
+                return JsonResponse({'success': True, 'message': f"Você se inscreveu em {disciplina.nome} com sucesso!"})
+            return JsonResponse({'success': False, 'message': f"Você já está inscrito em {disciplina.nome}."})
+        if created:
+            messages.success(request, f"Você se inscreveu em {disciplina.nome} com sucesso!")
+        else:
+            messages.info(request, f"Você já está inscrito em {disciplina.nome}.")
+        return redirect('minhasdisciplinas')
+    return redirect('index')
 
 @login_required
 def cancelar_inscrever(request, inscricao_id):
     if request.method == 'POST':
-        # Verifica se a inscrição existe e pertence ao usuário logado
         inscricao = get_object_or_404(Inscricao, id=inscricao_id, usuario=request.user)
-        disciplina_nome = inscricao.disciplina.nome  # Obtém o nome da disciplina para a mensagem
-        inscricao.delete()  # Cancela a inscrição
+        disciplina_nome = inscricao.disciplina.nome
+        inscricao.delete()
+        print(f"Cancelamento - Usuário logado: {request.user}, Disciplina: {disciplina_nome}")
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            return JsonResponse({'success': True, 'message': f"Inscrição em {disciplina_nome} cancelada com sucesso!"})
         messages.success(request, f"Inscrição em {disciplina_nome} cancelada com sucesso!")
-    return redirect('minhasdisciplinas')  # Redireciona para a página de disciplinas inscritas
+    return redirect('minhasdisciplinas')
 
 @login_required
 def paginadisciplina(request, id_disciplina=None):
     if id_disciplina:
         disciplina = get_object_or_404(Disciplina, id=id_disciplina)
-        return render(request, 'disciplinas/paginadisciplina.html', {'disciplina': disciplina})
+        print(f"Disciplina: {disciplina.nome}, Módulos: {list(disciplina.modulos.all())}")
+        return render(request, 'paginadisciplina.html', {'disciplina': disciplina})
     else:
-        return render(request, 'disciplinas/geral.html')
+        disciplinas = Disciplina.objects.all()
+        return render(request, 'disciplinas/geral.html', {'disciplinas': disciplinas})
 
 @login_required
 def lista_disciplinas(request):
     if not request.user.is_staff:
         messages.error(request, "Acesso negado. Apenas administradores podem ver esta página.")
         return redirect('index')
-    curso = Curso.objects.get(nome="Informática para Internet")
-    disciplinas = curso.disciplinas.all()
-    return render(request, 'disciplinas/lista_disciplinas.html', {'disciplinas': disciplinas})
-
-# Visualização de disciplina (usuário)
-def paginadisciplina(request, id_disciplina=None):
-    if id_disciplina:
-        disciplina = get_object_or_404(Disciplina, id=id_disciplina)
-        print(f"Disciplina: {disciplina.nome}")  # Depuração
-        print(f"Módulos: {list(disciplina.modulos.all())}")  # Depuração
-        return render(request, 'paginadisciplina.html', {'disciplina': disciplina})
-    else:
-        disciplinas = Disciplina.objects.all()
-        return render(request, 'disciplinas/geral.html', {'disciplinas': disciplinas})
-
-    
-def inscrever(request, disciplina_id):
-    disciplina = get_object_or_404(Disciplina, id=disciplina_id)
-    usuario = "usuario_teste"
-    print(f"Tentando inscrever {usuario} na disciplina {disciplina.nome} (ID: {disciplina_id})")
-    # Cria uma nova inscrição se não existir
-    if not Inscricao.objects.filter(usuario=usuario, disciplina=disciplina).exists():
-        inscricao = Inscricao(usuario=usuario, disciplina=disciplina)
-        inscricao.save()
-        print(f"Inscrição criada: {inscricao}")
-    else:
-        print(f"Já inscrito em {disciplina.nome}")
-    print(f"Total de inscrições para {usuario}: {Inscricao.objects.filter(usuario=usuario).count()}")
-    return redirect('minhasdisciplinas')
-
-def cancelar_inscrever(request, inscricao_id):
-    if request.method == 'POST':
-        inscricao = get_object_or_404(Inscricao, id=inscricao_id)
-        inscricao.delete()
-        return redirect('minhasdisciplinas')
-    else:
-        return redirect('minhasdisciplinas')
-
-def minhasdisciplinas(request):
-    usuario = "usuario_teste"
-    inscricoes = Inscricao.objects.filter(usuario=usuario)
-    print(f"Inscrições encontradas: {list(inscricoes)}")
-    print(f"Disciplinas inscritas para {usuario}: {[i.disciplina.nome for i in inscricoes]}")
-    return render(request, 'minhasdisciplinas.html', {'inscricoes': inscricoes})
-
-# Gerenciamento de disciplinas (aberto a todos por agora)
-def lista_disciplinas(request):
     curso = Curso.objects.get(nome="Informática para Internet")
     disciplinas = curso.disciplinas.all()
     return render(request, 'disciplinas/lista_disciplinas.html', {'disciplinas': disciplinas})
