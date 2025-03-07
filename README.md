@@ -10,6 +10,11 @@ O **Mapa da Jornada** é uma aplicação web que:
 - Exibe as disciplinas inscritas em uma página paginada.
 - Restringe ações (**inscrição, cancelamento**) a usuários autenticados.
 
+## **Integrantes do Projeto
+- **Jean Lucas**
+- **Thierry Henry**
+- **Eduardo Maurício**
+
 ## **Tecnologias Utilizadas**
 - **Django**: Framework backend para Python.
 - **SQLite**: Banco de dados padrão (pode ser substituído por PostgreSQL ou outro).
