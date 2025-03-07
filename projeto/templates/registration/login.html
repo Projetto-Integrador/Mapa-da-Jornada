@@ -10,6 +10,7 @@
         {{ form|crispy }}
         <button type="submit" class="bg-green-500 text-black font-medium px-6 py-2 rounded-full border-0 text-xl mt-4 w-full">Entrar</button>
     </form>
+    <a href="{% url 'password_reset' %}" class="text-decoration-none">Esqueceu a senha?</a> -
     <p class="mt-4 text-center">Não tem conta? <a href="{% url 'cadastro' %}" class="text-blue-600 underline">Cadastre-se</a></p>
 </div>
 {% endblock %}

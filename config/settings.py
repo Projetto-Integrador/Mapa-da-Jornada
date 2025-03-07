@@ -50,7 +50,9 @@ AUTH_USER_MODEL = 'contas.Usuario'
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/accounts/perfil/'  # Adicione isso
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # Exibe e-mails no console
+DEFAULT_FROM_EMAIL = 'Mapa da Jornada <noreply@mapadajornada.com>'  # Remetente fictício para o console
 
 
 MIDDLEWARE = [
