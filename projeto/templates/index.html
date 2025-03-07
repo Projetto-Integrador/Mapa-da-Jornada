@@ -16,6 +16,12 @@
     </button>
     
     <h1 class="text-6xl font-bold"> Informática para Internet </h1>
+
+    <!-- Elemento para mensagens AJAX movido para cima -->
+    {% if user.is_authenticated %}
+        <div id="mensagem-ajax" class="hidden mt-4 p-4 rounded-lg"></div>
+    {% endif %}
+
     <div class="desc flex my-4 w-full"> 
         <h3 class="mr-4"><strong> Carga horária: </strong> <br /> 3995h </h3>
         <h3 class="mr-4"><strong> Modalidade: </strong> <br /> Técnico Integrado </h3>
@@ -33,7 +39,7 @@
         <div class="grid content-start gap-4 mt-2 rounded-2xl">
             <div id="materias" class="rounded-2xl relative flex flex-col">
                 {% for disciplina in disciplinas %}
-                    <div class="bg-green-300 h-72 rounded-3xl p-4 relative flex flex-col mb-6">
+                    <div id="disciplina-{{ disciplina.id }}" class="bg-green-300 h-72 rounded-3xl p-4 relative flex flex-col mb-6">
                         <div class="flex-1">
                             <h2 class="text-xl font-bold">{{ disciplina.nome }}</h2>
                             <h3 class="py-2">Carga horária: 300h</h3>
@@ -60,5 +66,57 @@
             </div>
         </div>
     </div>
+
+    <!-- Script jQuery para AJAX -->
+    {% if user.is_authenticated %}
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+        $(document).ready(function() {
+            $('.inscrever-form').on('submit', function(event) {
+                event.preventDefault();  // Impede o recarregamento da página
+                var form = $(this);
+                var disciplinaId = form.closest('div[id^="disciplina-"]').attr('id').split('-')[1];
+
+                $.ajax({
+                    url: form.attr('action'),  // URL da view inscrever
+                    type: 'POST',
+                    data: form.serialize(),  // Dados do formulário (inclui csrf_token)
+                    headers: {'X-Requested-With': 'XMLHttpRequest'},  // Indica que é uma requisição AJAX
+                    success: function(response) {
+                        var mensagemDiv = $('#mensagem-ajax');
+                        if (response.success) {
+                            // Sucesso: remove o botão e exibe mensagem
+                            mensagemDiv.text(response.message)
+                                .removeClass('hidden bg-red-100 text-red-800 bg-yellow-100 text-yellow-800')
+                                .addClass('bg-green-100 text-green-800')
+                                .fadeIn();
+                            $('#disciplina-' + disciplinaId + ' .inscrever-form').remove();
+                        } else {
+                            // Já inscrito: exibe mensagem de aviso
+                            mensagemDiv.text(response.message)
+                                .removeClass('hidden bg-green-100 text-green-800 bg-red-100 text-red-800')
+                                .addClass('bg-yellow-100 text-yellow-800')
+                                .fadeIn();
+                        }
+                        // Esconde a mensagem após 3 segundos
+                        setTimeout(function() {
+                            mensagemDiv.fadeOut();
+                        }, 3000);
+                    },
+                    error: function(xhr, status, error) {
+                        // Erro: exibe mensagem de erro
+                        $('#mensagem-ajax').text('Erro ao processar a inscrição: ' + error)
+                            .removeClass('hidden bg-green-100 text-green-800 bg-yellow-100 text-yellow-800')
+                            .addClass('bg-red-100 text-red-800')
+                            .fadeIn();
+                        setTimeout(function() {
+                            mensagemDiv.fadeOut();
+                        }, 3000);
+                    }
+                });
+            });
+        });
+        </script>
+    {% endif %}
 </div>
 {% endblock content %}
