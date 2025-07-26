@@ -1,122 +1,491 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="pt-br">
 
-{% block content %}
-<main class="w-auto h-[600px] flex flex-col items-center justify-center bg-white rounded shadow p-6">
-    <div class="text-center">
-        <button class="max-w-[800px] mx-auto bg-green-300 rounded-full text-black font-medium px-12 py-2 border-0 text-lg mb-10 items-center">
-            <a href="https://amor.com"> 💚 APROVEITE A JORNADA </a>
-        </button>
-        <h1 class="text-6xl font-sora font-bold mb-4">Descubra o que é possível com <br/> o extenso mundo da <br/> criação.</h1>
-        <p class="text-gray-600 text-lg max-w-[800px] mx-auto p-4">Nós criamos o Mapa da Jornada para ajudar na sua jornada de aprendizado. Um mapeamento das principais demandas exigidas pelo mercado, com sugestões, evidências e opiniões.</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa da Jornada</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --color-dark-whtext-accent-white: #070A23;
+            --color-accent-whtext-accent-white: #4A5AF0;
+            --color-accent-white: #3A4AE0;
+            --color-light-text: #E0E0E0;
+            --color-medium-dark-whtext-accent-white: #1A1D3A;
+        }
+
+        .bg-dark-whtext-accent-white {
+            background-color: var(--color-dark-whtext-accent-white);
+        }
+
+        .bg-accent-whtext-accent-white {
+            background-color: var(--color-accent-whtext-accent-white);
+        }
+
+        .hover\:bg-accent-white:hover {
+            background-color: var(--color-accent-white);
+        }
+
+        .text-accent-white {
+            color: var(--color-accent-whtext-accent-white);
+        }
+
+        .hover\:text-accent-white:hover {
+            color: var(--color-accent-white);
+        }
+
+        .text-light-text {
+            color: var(--color-light-text);
+        }
+
+        .bg-medium-dark-whtext-accent-white {
+            background-color: var(--color-medium-dark-whtext-accent-white);
+        }
+
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, transform;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased">
+    {% block header %}
+    <header class="flex items-center px-[48px] w-full h-[80px] bg-dark-whtext-accent-white text-light-text">
+        <h1 class="text-xl no-underline"><a href="{% url 'index' %}">Surpresa!</a></h1>
+        {% if user.is_authenticated and user.is_staff %}
+        <h1 class="ml-4 text-xl no-underline"><a href="{% url 'lista_disciplinas' %}">Disciplinas</a></h1>
+        {% endif %}
+        <div class="ml-auto flex items-center space-x-4">
+            {% if user.is_authenticated %}
+            <button
+                class="bg-accent-whtext-accent-white hover:bg-accent-white rounded-full text-white font-medium px-6 py-2 border-0 text-xl items-center">
+                <a href="{% url 'minhasdisciplinas' %}">Área do Aluno</a>
+            </button>
+            <button
+                class="bg-accent-whtext-accent-white hover:bg-accent-white rounded-full text-white font-medium px-6 py-2 border-0 text-xl items-center">
+                <a href="{% url 'perfil' %}">Perfil</a>
+            </button>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit"
+                    class="bg-red-500 hover:bg-red-600 rounded-full text-white font-medium px-6 py-2 border-0 text-xl items-center ml-4">
+                    Sair
+                </button>
+            </form>
+            {% else %}
+            <button
+                class="bg-accent-whtext-accent-white hover:bg-accent-white rounded-full text-white font-medium px-6 py-2 border-0 text-xl items-center">
+                <a href="{% url 'login' %}">Área do Aluno</a>
+            </button>
+            {% endif %}
+        </div>
+    </header>
+    {% endblock header %}
+
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {% if messages %}
+        <div>
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% block content %}{% endblock %}
     </div>
-</main>
-<div class="w-auto h-full bg-black/10 rounded shadow px-64 py-16 flex flex-col">
-    <button class="max-w-[800px] mx-auto bg-green-300 rounded-full text-black font-medium px-12 py-2 border-0 text-lg mb-10 items-center">
-        <a href=""> 💚 PANORAMA GERAL </a>
-    </button>
-    
-    <h1 class="text-6xl font-bold"> Informática para Internet </h1>
 
-    <!-- Elemento para mensagens AJAX movido para cima -->
-    {% if user.is_authenticated %}
-        <div id="mensagem-ajax" class="hidden mt-4 p-4 rounded-lg"></div>
-    {% endif %}
-
-    <div class="desc flex my-4 w-full"> 
-        <h3 class="mr-4"><strong> Carga horária: </strong> <br /> 3995h </h3>
-        <h3 class="mr-4"><strong> Modalidade: </strong> <br /> Técnico Integrado </h3>
-        <h3 class="mr-4"><strong> Duração: </strong> <br /> Quatro anos </h3>
-        <h3 class="mr-4"><strong> Tipo de ensino: </strong> <br /> Presencial </h3>
-        <h3 class="mr-4"><strong> Oferta em: </strong> <br /> 
-            <a class="underline" href="https://site.com">Natal-Central</a> | 
-            <a class="underline" href="https://site.com">Natal-Zona Norte</a> | 
-            <a class="underline" href="https://natal.com">São Paulo do Potengi</a>
-        </h3>
-    </div>
-    <div class="border-t-2 border-black my-2"></div>
-
-    <div class="grid w-full gap-4 h-full">
-        <div class="grid content-start gap-4 mt-2 rounded-2xl">
-            <div id="materias" class="rounded-2xl relative flex flex-col">
-                {% for disciplina in disciplinas %}
-                    <div id="disciplina-{{ disciplina.id }}" class="bg-green-300 h-72 rounded-3xl p-4 relative flex flex-col mb-6">
-                        <div class="flex-1">
-                            <h2 class="text-xl font-bold">{{ disciplina.nome }}</h2>
-                            <h3 class="py-2">Carga horária: 300h</h3>
-                        </div>
-                        <div class="mt-auto flex space-x-2">
-                            {% if user.is_authenticated %}
-                                <form method="post" action="{% url 'inscrever' disciplina.id %}" class="inscrever-form">
-                                    {% csrf_token %}
-                                    <button type="submit" class="bg-blue-600 text-white rounded-lg w-[30%] px-2 py-4 hover:bg-blue-700">Inscrever-se</button>
-                                </form>
-                            {% else %}
-                                <p class="text-gray-600">Faça login para se inscrever</p>
-                            {% endif %}
-                        </div>
-                        <img src="https://fastly.picsum.photos/id/479/200/200.jpg?hmac=VH6eGzugyQKHVUXvN1fcPAfAN5PbTkE8Tf22vb6JuG8" alt="Imagem da disciplina" class="absolute top-0 right-0 h-full w-1/3 object-cover rounded-3xl">
-                    </div>
-                {% empty %}
-                    <div class="bg-green-300 h-56 rounded-2xl p-4 relative flex flex-col">
-                        <div class="flex-1">
-                            <h2 class="text-xl font-bold text-gray-600">Nenhuma disciplina cadastrada</h2>
-                        </div>
-                    </div>
-                {% endfor %}
+    <main class="min-h-screen bg-dark-whtext-accent-white text-light-text">
+        <div class="container mx-auto px-4 py-16">
+            <div class="text-center max-w-5xl mx-auto">
+                <div class="mb-8">
+                    <a href="https://amor.com"
+                        class="inline-flex items-center bg-accent-whtext-accent-white hover:bg-accent-white transition-colors duration-200 rounded-full text-white font-medium px-8 py-3 text-lg shadow-lg">
+                        💙 APROVEITE A JORNADA
+                    </a>
+                </div>
+                <h1 class="text-5xl md:text-4xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+                    Descubra o que é possível com o extenso mundo da <span class="text-accent-white">criação.</span>
+                </h1>
+                <p class="text-gray-300 text-xl max-w-4xl mx-auto leading-relaxed mb-16">
+                    Nós criamos o Mapa da Jornada para ajudar na sua jornada de aprendizado.
+                    Um mapeamento das principais demandas exigidas pelo mercado, com sugestões,
+                    evidências e opiniões.
+                </p>
             </div>
         </div>
-    </div>
 
-    <!-- Script jQuery para AJAX -->
-    {% if user.is_authenticated %}
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-        $(document).ready(function() {
-            $('.inscrever-form').on('submit', function(event) {
-                event.preventDefault();  // Impede o recarregamento da página
-                var form = $(this);
-                var disciplinaId = form.closest('div[id^="disciplina-"]').attr('id').split('-')[1];
+        <div class="bg-dark-whtext-accent-white py-8">
+            <div class="container mx-auto px-2">
+                <div class="text-center mb-12 fade-in-section">
+                    <div class="mb-4">
+                        <span
+                            class="inline-flex items-center bg-accent-whtext-accent-white rounded-full text-white font-medium px-8 py-3 text-lg shadow-lg">
+                            💙 PANORAMA GERAL
+                        </span>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8">
+                        Informática para Internet
+                    </h2>
+                </div>
 
-                $.ajax({
-                    url: form.attr('action'),  // URL da view inscrever
-                    type: 'POST',
-                    data: form.serialize(),  // Dados do formulário (inclui csrf_token)
-                    headers: {'X-Requested-With': 'XMLHttpRequest'},  // Indica que é uma requisição AJAX
-                    success: function(response) {
-                        var mensagemDiv = $('#mensagem-ajax');
-                        if (response.success) {
-                            // Sucesso: remove o botão e exibe mensagem
-                            mensagemDiv.text(response.message)
-                                .removeClass('hidden bg-red-100 text-red-800 bg-yellow-100 text-yellow-800')
-                                .addClass('bg-green-100 text-green-800')
-                                .fadeIn();
-                            $('#disciplina-' + disciplinaId + ' .inscrever-form').remove();
-                        } else {
-                            // Já inscrito: exibe mensagem de aviso
-                            mensagemDiv.text(response.message)
-                                .removeClass('hidden bg-green-100 text-green-800 bg-red-100 text-red-800')
-                                .addClass('bg-yellow-100 text-yellow-800')
-                                .fadeIn();
-                        }
-                        // Esconde a mensagem após 3 segundos
-                        setTimeout(function() {
-                            mensagemDiv.fadeOut();
-                        }, 3000);
-                    },
-                    error: function(xhr, status, error) {
-                        // Erro: exibe mensagem de erro
-                        $('#mensagem-ajax').text('Erro ao processar a inscrição: ' + error)
-                            .removeClass('hidden bg-green-100 text-green-800 bg-yellow-100 text-yellow-800')
-                            .addClass('bg-red-100 text-red-800')
-                            .fadeIn();
-                        setTimeout(function() {
-                            mensagemDiv.fadeOut();
-                        }, 3000);
+                <div id="mensagem-ajax" class="hidden max-w-4xl mx-auto mb-6 p-4 rounded-lg"></div>
+
+                <div class="max-w-6xl mx-auto mb-12 fade-in-section">
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 bg-medium-dark-whtext-accent-white rounded-2xl p-8">
+                        <div class="text-center lg:text-left">
+                            <h3 class="font-bold text-white mb-2">Carga horária:</h3>
+                            <p class="text-gray-300">3995h</p>
+                        </div>
+                        <div class="text-center lg:text-left">
+                            <h3 class="font-bold text-white mb-2">Modalidade:</h3>
+                            <p class="text-gray-300">Técnico Integrado</p>
+                        </div>
+                        <div class="text-center lg:text-left">
+                            <h3 class="font-bold text-white mb-2">Duração:</h3>
+                            <p class="text-gray-300">Quatro anos</p>
+                        </div>
+                        <div class="text-center lg:text-left">
+                            <h3 class="font-bold text-white mb-2">Tipo de ensino:</h3>
+                            <p class="text-gray-300">Presencial</p>
+                        </div>
+                        <div class="text-center lg:text-left">
+                            <h3 class="font-bold text-white mb-2">Oferta em:</h3>
+                            <div class="space-y-1">
+                                <a href="#"
+                                    class="block text-white hover:text-accent-white no-underline text-sm">Natal-Central</a>
+                                <a href="#"
+                                    class="block text-white hover:text-accent-white no-underline text-sm">Natal-Zona
+                                    Norte</a>
+                                <a href="#"
+                                    class="block text-white hover:text-accent-white no-underline text-sm">São
+                                    Paulo do Potengi</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Disciplinas -->
+                <div class="max-w-6xl mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {% comment %} Exemplos de disciplinas {% endcomment %}
+                        <!-- Disciplina 1 -->
+                        <div id="disciplina-1"
+                            class="bg-medium-dark-whtext-accent-white rounded-3xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-200 relative overflow-hidden min-h-[300px] flex flex-col fade-in-section">
+                            <div class="flex-1 flex flex-col">
+                                <div class="mb-6">
+                                    <h3 class="text-2xl font-bold text-white mb-3">Programação Web</h3>
+                                    <p class="text-gray-300 font-medium">Carga horária: 300h</p>
+                                </div>
+                                <div class="mt-auto">
+                                    <form method="post" action="#" class="inscrever-form">
+                                        <button type="submit"
+                                            class="w-full bg-accent-whtext-accent-white hover:bg-accent-white text-white font-medium py-3 px-6 rounded-xl transition-colors duration-200 shadow-lg">
+                                            Inscrever-se
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <img src="https://placehold.co/80x80/1A1D3A/E0E0E0?text=WEB"
+                                class="absolute top-4 right-4 w-20 h-20 object-cover rounded-2xl opacity-80">
+                        </div>
+
+                        <!-- Disciplina 2 -->
+                        <div id="disciplina-2"
+                            class="bg-medium-dark-whtext-accent-white rounded-3xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-200 relative overflow-hidden min-h-[300px] flex flex-col fade-in-section">
+                            <div class="flex-1 flex flex-col">
+                                <div class="mb-6">
+                                    <h3 class="text-2xl font-bold text-white mb-3">Banco de Dados</h3>
+                                    <p class="text-gray-300 font-medium">Carga horária: 300h</p>
+                                </div>
+                                <div class="mt-auto">
+                                    <form method="post" action="#" class="inscrever-form">
+                                        <button type="submit"
+                                            class="w-full bg-accent-whtext-accent-white hover:bg-accent-white text-white font-medium py-3 px-6 rounded-xl transition-colors duration-200 shadow-lg">
+                                            Inscrever-se
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <img src="https://placehold.co/80x80/1A1D3A/E0E0E0?text=DB"
+                                class="absolute top-4 right-4 w-20 h-20 object-cover rounded-2xl opacity-80">
+                        </div>
+
+                        <!-- Disciplina 3 -->
+                        <div id="disciplina-3"
+                            class="bg-medium-dark-whtext-accent-white rounded-3xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-200 relative overflow-hidden min-h-[300px] flex flex-col fade-in-section">
+                            <div class="flex-1 flex flex-col">
+                                <div class="mb-6">
+                                    <h3 class="text-2xl font-bold text-white mb-3">Redes de Computadores</h3>
+                                    <p class="text-gray-300 font-medium">Carga horária: 300h</p>
+                                </div>
+                                <div class="mt-auto">
+                                    <form method="post" action="#" class="inscrever-form">
+                                        <button type="submit"
+                                            class="w-full bg-accent-whtext-accent-white hover:bg-accent-white text-white font-medium py-3 px-6 rounded-xl transition-colors duration-200 shadow-lg">
+                                            Inscrever-se
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <img src="https://placehold.co/80x80/1A1D3A/E0E0E0?text=NET"
+                                class="absolute top-4 right-4 w-20 h-20 object-cover rounded-2xl opacity-80">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Container Principal que centraliza todo o conteúdo -->
+                <div class="container mx-auto px-6 py-12 md:py-20 max-w-6xl">
+
+                    <!-- Seção 1: Mapa da Jornada -->
+                    <section class="mb-24 text-center">
+                        <div class="flex flex-col items-center gap-8">
+                            <!-- Coluna de Texto -->
+                            <div>
+                                <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">Você conhece o Mapa da
+                                    Jornada?</h1>
+                                <p class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+                                    O Mapa da Jornada é uma curadoria de aprendizado relacionado a cada tópico, assunto
+                                    e matéria, categorizado por um determinado período.
+                                </p>
+                                <a href="#"
+                                    class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-10 rounded-lg text-lg transition-transform transform hover:scale-105 glow-effect">
+                                    ACESSAR
+                                </a>
+                            </div>
+                        </div>
+                </div>
+                </section>
+
+                <!-- Seção 2: O que o Instituto Federal proporciona -->
+                <section class="text-center mb-24">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4 max-w-3xl mx-auto leading-snug">
+                        O que o Instituto Federal proporciona em termos de aprendizagem e desenvolvimento dos futuros
+                        técnicos em Informática para Internet?
+                    </h2>
+                    <p class="text-lg text-gray-300 max-w-2xl mx-auto">
+                        Você receberá total apoio e assistência de nossos professores juntos, vocês construirão seu
+                        currículo, seu portfólio e seu plano de carreira. Tudo isso o ajudará a encontrar um emprego na
+                        área que deseja.
+                    </p>
+                </section>
+
+                <!-- Seção 3: O que o curso proporciona? -->
+                <section>
+                    <h3 class="text-3xl font-bold text-center mb-12">O que o curso proporciona?</h3>
+                    <!-- Grid de Cards -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+                        <!-- Card 1 -->
+                        <div
+                            class="bg-gray-100 text-gray-800 p-8 rounded-xl flex flex-col items-start text-left h-full transition-transform transform hover:-translate-y-2">
+                            <div
+                                class="bg-indigo-600 text-white w-10 h-10 flex items-center justify-center rounded-full font-bold text-xl mb-6">
+                                1</div>
+                            <h4 class="text-xl font-bold mb-3">Criação de um portifólio</h4>
+                            <p class="text-gray-600">Você trabalhará com nossos cases reais de projetos que o ajudarão
+                                para expandir o seu portifólio.</p>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div
+                            class="bg-gray-100 text-gray-800 p-8 rounded-xl flex flex-col items-start text-left h-full transition-transform transform hover:-translate-y-2">
+                            <div
+                                class="bg-indigo-600 text-white w-10 h-10 flex items-center justify-center rounded-full font-bold text-xl mb-6">
+                                2</div>
+                            <h4 class="text-xl font-bold mb-3">Plano de carreira</h4>
+                            <p class="text-gray-600">Você trabalhará em projetos reais junto a empresas que poderão
+                                expandir o seu portifólio.</p>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div
+                            class="bg-gray-100 text-gray-800 p-8 rounded-xl flex flex-col items-start text-left h-full transition-transform transform hover:-translate-y-2">
+                            <div
+                                class="bg-indigo-600 text-white w-10 h-10 flex items-center justify-center rounded-full font-bold text-xl mb-6">
+                                3</div>
+                            <h4 class="text-xl font-bold mb-3">Práticas em laboratório</h4>
+                            <p class="text-gray-600">Você trabalhará com dispositivos para praticar de perto o
+                                desenvolvimento de seus programas e componentes.</p>
+                        </div>
+
+                        <!-- Card 4 -->
+                        <div
+                            class="bg-gray-100 text-gray-800 p-8 rounded-xl flex flex-col items-start text-left h-full transition-transform transform hover:-translate-y-2">
+                            <div
+                                class="bg-indigo-600 text-white w-10 h-10 flex items-center justify-center rounded-full font-bold text-xl mb-6">
+                                4</div>
+                            <h4 class="text-xl font-bold mb-3">Conexão com pessoas e empresas</h4>
+                            <p class="text-gray-600">Você trabalhará com cases reais de clientes que poderão estar
+                                usando sua questão.</p>
+                        </div>
+
+                    </div>
+                </section>
+
+            </div>
+            <!--Corpo Docente -->
+            <section class="flex flex-col items-center justify-center py-16 md:py-24 bg-dark-whtext-accent-white">
+                <div class="text-center max-w-4xl mx-auto mb-12">
+                    <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">Corpo Docente</h2>
+                    <p class="text-lg text-gray-300">
+                        Professores das matérias técnicas que lhe auxiliarão no melhor entendimento possível
+                        acerca do que rege a Informática para Internet.
+                    </p>
+                </div>
+
+                <div class="w-full max-w-5xl px-4">
+                    <div class="space-y-8">
+
+                        <!-- Card Professor 1 -->
+                        <div
+                            class="bg-medium-dark-whtext-accent-white rounded-lg shadow-lg overflow-hidden flex flex-col md:flex-row md:items-center">
+                            <div class="flex-shrink-0 p-6 flex justify-center items-center md:w-1/3">
+                                <img class="rounded-full w-48 h-48 object-cover border-4 border-accent-whtext-accent-white"
+                                    src="https://placehold.co/400x400/070A23/E0E0E0?text=Camila"
+                                    alt="Foto de Camila Taumaturgo">
+                            </div>
+                            <div class="p-6 md:p-8">
+                                <h2 class="text-2xl font-bold text-white mb-1">Camila Taumaturgo</h2>
+                                <p class="text-accent-white font-semibold mb-4">Mestra em Sistemas de
+                                    Computação (UFRN)</p>
+                                <p class="text-light-text text-justify">
+                                    Professora do Instituto Federal de Ciência e Tecnologia do Rio Grande do
+                                    Norte, Campus São Paulo do Potengi.
+                                    Atua no curso Técnico de Nível Médio em Informática para Internet na
+                                    forma Integral Presencial.
+                                    Possui graduação em Ciências da Computação e mestrado em Sistemas da
+                                    Computação pela Universidade Federal do Rio Grande do Norte.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Card Professor 2 -->
+                        <div
+                            class="bg-medium-dark-whtext-accent-white rounded-lg shadow-lg overflow-hidden flex flex-col md:flex-row-reverse md:items-center">
+                            <div class="flex-shrink-0 p-6 flex justify-center items-center md:w-1/3">
+                                <img class="rounded-full w-48 h-48 object-cover border-4 border-accent-whtext-accent-white"
+                                    src="https://placehold.co/400x400/070A23/E0E0E0?text=Ari" alt="Foto de Ari Barreto">
+                            </div>
+                            <div class="p-6 md:p-8 md:text-right">
+                                <h2 class="text-2xl font-bold text-white mb-1">Ari Barreto</h2>
+                                <p class="text-accent-white font-semibold mb-4">Mestrado em Tecnologia da
+                                    Informação (UFRN)</p>
+                                <p class="text-light-text text-justify md:text-right">
+                                    Possui graduação em Análise e Desenvolvimento de Sistemas pelo IFRN
+                                    (2011), pós-graduação em Banco de Dados pela AVM (2014)
+                                    e é Mestre em Tecnologia da Informação (UFRN). Atualmente é professor do
+                                    Instituto Federal do Rio Grande do Norte.
+                                    Tem experiência na área de Ciência da Computação, com ênfase em Web
+                                    Design, Desenvolvimento Web e Banco de Dados.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Card Professor 3 -->
+                        <div
+                            class="bg-medium-dark-whtext-accent-white rounded-lg shadow-lg overflow-hidden flex flex-col md:flex-row md:items-center">
+                            <div class="flex-shrink-0 p-6 flex justify-center items-center md:w-1/3">
+                                <img class="rounded-full w-48 h-48 object-cover border-4 border-accent-whtext-accent-white"
+                                    src="https://placehold.co/400x400/070A23/E0E0E0?text=Fernanda"
+                                    alt="Foto de Fernanda Lígia">
+                            </div>
+                            <div class="p-6 md:p-8">
+                                <h2 class="text-2xl font-bold text-white mb-1">Fernanda Lígia</h2>
+                                <p class="text-accent-white font-semibold mb-4">Bacharel em Ciência da
+                                    Computação (UFC)</p>
+                                <p class="text-light-text text-justify">
+                                    Concluiu o Mestrado Acadêmico em Ciência da Computação pela Universidade
+                                    Federal do Ceará (UFC), na área de Banco de Dados.
+                                    Possui Bacharelado em Ciência da Computação pela Universidade Estadual
+                                    do Ceará (UECE). É Técnica em Telecomunicações pelo Instituto Federal de
+                                    Educação,
+                                    Ciência e Tecnologia do Ceará (IFCE). É professora do Instituto Federal
+                                    de Educação, Ciência e Tecnologia do Rio Grande do Norte (IFRN).
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Card Professor 4 -->
+                        <div
+                            class="bg-medium-dark-whtext-accent-white rounded-lg shadow-lg overflow-hidden flex flex-col md:flex-row-reverse md:items-center">
+                            <div class="flex-shrink-0 p-6 flex justify-center items-center md:w-1/3">
+                                <img class="rounded-full w-48 h-48 object-cover border-4 border-accent-whtext-accent-white"
+                                    src="https://placehold.co/400x400/070A23/E0E0E0?text=Diego"
+                                    alt="Foto de Diego Vinicius">
+                            </div>
+                            <div class="p-6 md:p-8 md:text-right">
+                                <h2 class="text-2xl font-bold text-white mb-1">Diego Vinicius</h2>
+                                <p class="text-accent-white font-semibold mb-4">Mestre em Engenharia Elétrica
+                                    e Computação (UFRN)</p>
+                                <p class="text-light-text text-justify md:text-right">
+                                    Possui graduação em Análise e Desenvolvimento de Sistemas pelo IFRN
+                                    (2012) e Mestrado em Engenharia Elétrica e de Computação pela UFRN. Tem
+                                    experiência na área de Ciência da Computação, com ênfase em
+                                    Desenvolvimento Web, Banco de Dados e Sistemas Embarcados.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Card Professor 5 -->
+                        <div
+                            class="bg-medium-dark-whtext-accent-white rounded-lg shadow-lg overflow-hidden flex flex-col md:flex-row md:items-center">
+                            <div class="flex-shrink-0 p-6 flex justify-center items-center md:w-1/3">
+                                <img class="rounded-full w-48 h-48 object-cover border-4 border-accent-whtext-accent-white"
+                                    src="https://placehold.co/400x400/070A23/E0E0E0?text=Pedrina"
+                                    alt="Foto de Pedrina Brasil">
+                            </div>
+                            <div class="p-6 md:p-8">
+                                <h2 class="text-2xl font-bold text-white mb-1">Pedrina Brasil</h2>
+                                <p class="text-accent-white font-semibold mb-4">Mestra em Ciência da
+                                    Computação (UFRPE)</p>
+                                <p class="text-light-text text-justify">
+                                    Tem experiência na área da Ciência da Computação, com ênfase em
+                                    Engenharia de Software, atuando principalmente nos seguintes temas:
+                                    Análise,
+                                    desenvolvimento e manutenção de sistemas de computadores (Desktop, Web,
+                                    e Mobile); Administração de Banco de Dados;
+                                    Linguagens de Programação e Plataformas (Java, C#, PHP e Python).
+                                    Atualmente é Professora no IFRN campus Santa Cruz e
+                                    atua como pesquisadora ativa no grupo de pesquisa "GIIFE".
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+    </main>
+
+    <!-- Fade-in JS -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const fadeInSections = document.querySelectorAll('.fade-in-section');
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
                     }
                 });
-            });
+            }, observerOptions);
+            fadeInSections.forEach(section => observer.observe(section));
         });
-        </script>
-    {% endif %}
-</div>
-{% endblock content %}
+    </script>
+</body>
+
+</html>
